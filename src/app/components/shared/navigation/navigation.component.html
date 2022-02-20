@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+        <div class="logo" routerLink="/">Nvc Job Market</div>
+        <button class="navbar-toggler d-lg-none burger-btn" type="button" data-bs-toggle="collapse"
+            data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavId">
+            <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
+                <li class="nav-item mx-2 active">
+                    <a class="nav-link" routerLink="/">หน้าหลัก <span class="visually-hidden">(current)</span></a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" routerLink="/">ค้นหางาน</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" routerLink="/">งานที่สมัคร</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link" routerLink="/">โพสต์รับสมัครงาน</a>
+                </li>
+            </ul>
+            <hr>
+            <div class="btn-login-regis d-flex" *ngIf="!isLoggedIn">
+                <a routerLink="/login">เข้าสู่ระบบ</a>
+                <span class="line"></span>
+                <a routerLink="/register">ลงทะเบียน</a>
+            </div>
+            <div class="nav-item dropdown" *ngIf="isLoggedIn">
+                <div class="profile-menu d-flex" href="#" id="dropdown04" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    <img class="border rounded-circle" style="width: 40px; height: 40px;" src="../../../../assets/images/NullProfile.png" alt="">
+                    <h5 class="mx-3 mt-2">{{ currentUser.firstName }}</h5>
+                </div>
+                <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdown04">
+                    <li><a class="dropdown-item" routerLink="/profile">ข้อมูลส่วนตัว</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" (click)="logout()">ออกจากระบบ</a></li>
+                </ul>
+            </div>
+            <hr>
+        </div>
+        
+    </div>
+</nav>

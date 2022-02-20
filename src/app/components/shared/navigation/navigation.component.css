@@ -1,0 +1,73 @@
+
+.navbar{
+    background:#6D84E8;
+    color: #ffff;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+}
+
+.logo{
+    font-weight: bold;
+    font-size: 25px;
+    color: #D1E6FF;
+    text-shadow: 2px 2px  rgb(70, 77, 85);
+    cursor: pointer;
+}
+.logo:hover{
+    font-size: 25px;
+    color: #D1E6FF;
+}
+
+.nav-item .nav-link{
+    color:#D1E6FF;
+    font-size: 20px;
+    transition: 0.3s;
+}
+.nav-item:hover .nav-link{
+    color: #fff;
+    transform: scale(1.05);
+    text-shadow: 2px 2px 4px rgb(70, 77, 85);
+}
+
+.btn-login-regis{
+    padding: 0px 15px;
+    border-radius: 50px;
+}
+.btn-login-regis a{
+    padding: 5px 0 ;
+    display: block;
+    font-size: 20px;
+    text-decoration: none;
+    color: #fff;
+    transition: 0.4s;
+}
+.btn-login-regis a:hover{
+    transform: scale(1.2);
+    text-shadow: 2px 2px 4px rgb(70, 77, 85);
+}
+.btn-login-regis span{
+    border-left: 2px solid #fff;
+    margin: 0 15px;
+}
+
+.dropdown-menu{
+    background: #fff;
+    color: #000;
+}
+
+.burger-btn{
+    color: #fff;
+    background: #fff;
+}
+
+.profile-menu{
+    cursor: pointer;
+}
+.profile-menu h5{
+    transition: 0.3s;
+}
+.profile-menu:hover h5{
+    color: #D1E6FF;
+}

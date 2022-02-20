@@ -1,0 +1,56 @@
+<div *ngIf="!isLoggedIn">
+    <div class="container-fluid main p-0">
+
+        <div class="header d-flex justify-content-center align-items-center">
+            <div class="circleL2"></div>
+            <div class="circleL1"></div>
+            <div class="circleR1"></div>
+            <div class="circleR2"></div>
+            <div class="content container">
+                <div class="row p-0 h-100">
+                    <div class="col-6 h-100 p-5">
+                        <div class="img-box row m-0">
+                            <img class="border" src="../../../../assets/images/login.png" alt="">
+                        </div>
+                        <div class="row mt-2 m-0 text-center d-block">
+                            คุณ <a routerLink="/register" class="btn-register m-0 p-0"> ลงทะเบียน </a> แล้วหรือยัง ?
+                        </div>
+                    </div>
+                    <div class="col-6 h-100 p-5 login-box">
+                        <h1 class="text-center title">เข้าสู่ระบบ</h1>
+                        <div class="w-100 d-flex justify-content-center mt-5">
+                            <form class="w-100" [formGroup]="loginForm">
+                                <label class="label-input" for="">เข้าสู่ระบบด้วย</label>
+                                <div class="mb-3">
+                                    <input class="form-check-input me-2" type="radio" name="flexRadioDefault"
+                                        id="flexRadioDefault1" value="member" formControlName="category">
+                                    <label class="form-check-label label-input me-5" for="flexRadioDefault1">
+                                        สมาชิก
+                                    </label>
+
+                                    <input class="form-check-input me-2" type="radio" name="flexRadioDefault" id="flexRadioDefault2" value="company" formControlName="category">
+                                    <label class="form-check-label label-input " for="flexRadioDefault2">
+                                      บริษัท
+                                    </label>
+                                </div>
+                                <div class="mb-5">
+                                    <label class="label-input" for="">อีเมล</label>
+                                    <input type="email" class="form-control" required formControlName="email">
+                                </div>
+                                <div class="my-5">
+                                    <label class="label-input" for="">รหัสผ่าน</label>
+                                    <input type="password" class="form-control" required formControlName="password">
+                                </div>
+
+                                <div class="my-5 d-flex justify-content-center">
+                                    <button class="btn-login" (click)="onLogin()">เข้าสู่ระบบ</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-main *ngIf="isLoggedIn"></app-main>

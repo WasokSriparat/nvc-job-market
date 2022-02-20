@@ -1,0 +1,27 @@
+<div *ngIf="!isLoggedIn">
+    <div class="container-fluid main p-0">
+
+        <div class="header d-flex justify-content-center align-items-center">
+            <div class="circleL2"></div>
+            <div class="circleL1"></div>
+            <div class="circleR1"></div>
+            <div class="circleR2"></div>
+            <div class="content container">
+                <div class="row p-0 h-100">
+                    <div class="col-6 p-0 h-100 d-flex justify-content-center align-items-center">
+                        <div class="btn-circle member">
+                            <a routerLink="/register/member">ลงทะเบียน <span>สมาชิก</span></a>
+                        </div>
+                    </div>
+                    <div class="col-6 p-0 h-100 d-flex justify-content-center align-items-center">
+                        <div class="btn-circle company">
+                            <a routerLink="/register/company">ลงทะเทียน <span>บริษัท</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<app-main *ngIf="isLoggedIn"></app-main>

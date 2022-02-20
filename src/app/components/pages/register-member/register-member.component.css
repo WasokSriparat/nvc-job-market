@@ -1,0 +1,112 @@
+.main{
+    height: 919px;
+    width: 100%;
+}
+
+.header{
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.circleL1{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #D1E6FF;
+    top: 0;
+    clip-path: circle(200px at left 500px );
+}
+.circleL2{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #77A9E6;
+    top: 0;
+    clip-path: circle(400px at left 1000px );
+}
+.circleR1{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #77A9E6;
+    top: 0;
+    clip-path: circle(400px at right -100px );
+}
+.circleR2{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #D1E6FF;
+    top: 0;
+    clip-path: circle(200px at right 300px );
+}
+
+.content{
+    width: 1140px;
+    height: 600px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border-radius: 25px;
+    position: relative;
+    color: #000;
+    background: #fff;
+}
+.img-box{
+    width: 100%;
+    height: 70%;
+    border-radius: 25px;
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+}
+.img-box img{
+    width: 100%;
+    height: auto;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.btn-register{
+    text-decoration: none;
+    font-size: 18px;
+}
+.register-box{
+    width: 50%;
+    height: 100%;
+    background: rgb(62, 203, 202);
+    border-radius: 0px 25px 25px 0px;
+    transition: 0.5s;
+}
+.register-box:hover{
+    transform: scale(1.1);
+    border-radius: 0;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+.register-box .title{
+    font-weight: bold;
+    color: #fff;
+    font-size: 50px;
+    transition: 0.5s;
+}
+.register-box:hover .title{
+    text-shadow: 3px 3px #000;
+}
+.label-input{
+    font-size: 18px;
+    color: #fff;
+}
+.btn-register{
+    /* display: block; */
+    /* width: 70px;
+    height: 70px; */
+    border: 0;
+    /* border-radius: 100%; */
+    background: #fff;
+    padding: 10px 15px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    transition: 0.4s;
+}
+.btn-register:hover{
+    transform: scale(1.1);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 5px;
+}

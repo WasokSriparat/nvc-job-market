@@ -1,0 +1,67 @@
+.profile{
+    width: 100%;
+    height: auto;
+}
+.banner{
+    padding-top: 85px;
+    width: 100%;
+    height: 240px;
+    background: #D3DAF8;
+    position: relative;
+}
+.banner-line{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: #cad7eeff;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.banner-content{
+    position: relative;
+    /* width: 1140px; */
+}
+.img-box{
+    position: relative;
+    margin: 0 0 0 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.img-box img{
+    width: 100%;
+    height: 100%;
+}
+.info-name{
+    padding: 0 30px;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.porfile-body{
+    /* width: 1100px; */
+    height: auto;
+}
+.info-contact{
+    height: 300px;
+    font-size: 20px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+.title {
+    font-weight: bold;
+}
+
+.info-education{
+    height: auto;
+    font-size: 20px;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}

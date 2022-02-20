@@ -1,0 +1,51 @@
+<div *ngIf="!isLoggedIn">
+    <div class="container-fluid main p-0">
+
+        <div class="header d-flex justify-content-center align-items-center">
+            <div class="circleL2"></div>
+            <div class="circleL1"></div>
+            <div class="circleR1"></div>
+            <div class="circleR2"></div>
+            <div class="content container">
+                <div class="row p-0 h-100">
+                    <div class="col-6 h-100 p-5  d-flex justify-content-center align-items-center">
+                        <div>
+                            <div class="img-box">
+                                <img src="../../../../assets/images/register-company.png" alt="">
+                            </div>
+                            <a class="d-block mt-3 text-center" routerLink="/register/member">ลงทะเบียน <span>สมาชิก</span></a>
+                        </div>
+                    </div>
+                    <div class="col-6 h-100 p-5 register-box">
+                        <h1 class="text-center title">ลงทะเบียน บริษัท</h1>
+                        <div class="w-100 d-flex justify-content-center mt-5">
+                            <form class="row" [formGroup]="registerForm">
+                                <div class="mb-2 col-12">
+                                    <label class="label-input" for="">ชื่อบริษัท</label>
+                                    <input type="text" class="form-control" required formControlName="companyName">
+                                </div>
+                                <div class="mb-2 col-12">
+                                    <label class="label-input" for="">อีเมล</label>
+                                    <input type="email" class="form-control" required formControlName="email">
+                                </div>
+                                <div class="mb-2 col-6">
+                                    <label class="label-input" for="">รหัสผ่าน</label>
+                                    <input type="password" class="form-control" required formControlName="password">
+                                </div>
+                                <div class="mb-2 col-6">
+                                    <label class="label-input" for="">ยืนยันรหัสผ่าน</label>
+                                    <input type="password" class="form-control" required formControlName="confirmPass">
+                                </div>
+                                <div class="col-12 mt-5">
+                                    <button class="btn-register w-100" (click)="onRegis()">ลงทะเบียน</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+<app-main *ngIf="isLoggedIn"></app-main>

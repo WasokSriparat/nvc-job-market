@@ -10,17 +10,38 @@ export class NavigationComponent implements OnInit {
 
   currentUser: any;
   isLoggedIn = false;
+  statusMember = false;
+  statusCompany = false;
+  statusAdmin = false;
+  userName: any;
 
   constructor(private tokenStorage: TokenStorageService) { }
 
   ngOnInit(): void {
-    this.isLoggedIn = !! this.tokenStorage.getToken();
+    this.isLoggedIn = !!this.tokenStorage.getToken();
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorage.getUser();
+
+      if (this.currentUser.category == "admin") {
+        this.statusCompany = true;
+        this.statusAdmin = true;
+      } else if (this.currentUser.category == "company") {
+        this.statusCompany = true;
+      } else {
+        this.statusMember = true;
+      }
+
+      if (this.statusMember) {
+        this.userName = this.currentUser.firstName;
+      } else {
+        this.userName = this.currentUser.name;
+      }
+
     }
+
   }
 
-  logout(){
+  logout() {
     this.tokenStorage.signOut();
     window.location.reload();
   }

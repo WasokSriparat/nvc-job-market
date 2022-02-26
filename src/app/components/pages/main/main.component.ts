@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  searchForm!: FormGroup;
+
+  constructor(private router:Router) { }
 
   ngOnInit(): void {
+    this.searchForm = new FormGroup({
+      title: new FormControl()
+    })
+  }
+
+  onSearch(){
+    if(this.searchForm.value.title == null || this.searchForm.value.title == "" || this.searchForm.value.title == " "){
+      this.router.navigate([`/jobpost/search`]);
+    }else{
+      this.router.navigate([`/jobpost/search/${this.searchForm.value.title}`]);
+    }
   }
 
 }

@@ -1,0 +1,11 @@
+.content{
+    position: relative;
+    height: auto;
+    padding: 40px 25px;
+}
+.post-box{
+    width: 75%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

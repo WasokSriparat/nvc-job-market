@@ -27,4 +27,45 @@ export class MemberService {
       }));
   }
 
+  getMembers() : any{
+    return this.http.get<any>(this.url);
+  }
+
+  getMemberById(id:any){
+    let getUrl = `${this.url}/${id}`;
+    return this.http.get<any>(getUrl);
+  }
+
+  updateMember(id:any,member:any){
+    let getUrl = `${this.url}/${id}`;
+    return this.http.put<any>(getUrl,member)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
+  updateAddress(id:any,address:any){
+    let getUrl = `${this.url}/address/update/${id}`;
+    return this.http.patch<any>(getUrl,address)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
+  addEducation(id:any,education:any){
+    let getUrl = `${this.url}/education/add/${id}`;
+    return this.http.patch<any>(getUrl,education)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
+  deleteEducation(id:any,eduId:any){
+    let getUrl = `${this.url}/education/delete/${id}`;
+    return this.http.patch<any>(getUrl,eduId)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
 }

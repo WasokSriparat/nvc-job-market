@@ -1,0 +1,184 @@
+<div class="container-fluid profile p-0">
+
+    <div class="banner">
+        <div class="banner-line"></div>
+    </div>
+
+    <div class="porfile-body container my-5 p-4 ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col p-4 mx-auto">
+                    <div class="row">
+                        <div class="col-12 mb-5 d-flex justify-content-center">
+                            <div class="img-box border">
+                                <img src="../../../../assets/images/NullProfile.png" alt="">
+                            </div>
+                        </div>
+                        <form class="col-12" [formGroup]="infoForm">
+                            <div class="row" *ngIf="statusMember">
+                                <label for="">ชื่อ-นามสกุล</label>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" formControlName="firstName">
+                                </div>
+                                <div class="col-3">
+                                    <input type="text" class="form-control" formControlName="lastName">
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="!statusMember">
+                                <label for="">ชื่อบริษัท</label>
+                                <div class="col-6">
+                                    <input type="text" class="form-control" formControlName="companyName">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <h5>อีเมล : </h5>
+                                    <input type="email" class="form-control w-75" formControlName="email">
+                                </div>
+                                <div class="col-6">
+                                    <h5>เบอร์โทร : </h5>
+                                    <input type="text" class="form-control w-75" formControlName="phoneNumber">
+                                </div>
+                            </div>
+                            <div class="row mb-2" *ngIf="statusMember">
+                                <div class="col-6">
+                                    <h5>วัน/เดือน/ปี เกิด : </h5>
+                                <input type="date" class="form-control w-75" formControlName="birthDay">
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-12">
+                                    <h5>คำอธิบาย : </h5>
+                                    <textarea class="form-control" rows="3" formControlName="description"></textarea>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col"></div>
+                                <div class="col-2">
+                                    <button class="btn btn-success w-100" (click)="onSaveInfo()">บันทึก</button>    
+                                </div>
+                                <div class="col-2">
+                                    <button class="btn btn-warning w-100" (click)="onResetInfo()">ยกเลิก</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <form class="row" [formGroup]="addressForm">
+                <h3 class="my-3"><b>ข้อมูลที่อยู่</b></h3>
+                <div class="row mb-2">
+                    <div class="col-12">
+                        ที่อยู่ :
+                        <input type="text" class="form-control" formControlName="houseNo">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        แขวง/ตำบล :
+                        <input type="text" class="form-control" formControlName="district">
+                    </div>
+                    <div class="col-6">
+                        เขต/อำเภอ :
+                        <input type="text" class="form-control" formControlName="subDistrict">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        จังหวัด :
+                        <input type="text" class="form-control" formControlName="province">
+                    </div>
+                    <div class="col-6">
+                        รหัสไปรษณีย์ :
+                        <input type="text" class="form-control" formControlName="country">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-6">
+                        ประเทศ :
+                        <input type="text" class="form-control" formControlName="zipCode">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col"></div>
+                    <div class="col-2">
+                        <button class="btn btn-success w-100" (click)="onSaveAddress()">บันทึก</button>    
+                    </div>
+                    <div class="col-2">
+                        <button class="btn btn-warning w-100" (click)="onResetAddress()">ยกเลิก</button>
+                    </div>
+                </div>
+            </form>
+            <hr>
+            <div class="row" *ngIf="statusMember">
+                <h3 class="my-3"><b>ข้อมูลการศึกษา</b></h3>
+                <div class=" overflow-scroll w-100 mb-2"style="height: 500px;">
+                    <form action="" class="mb-3"  *ngFor="let e of educations ">
+                        <div class="row mb-2">
+                            <div class="col-12">
+                                <h4>สถานศีกษา : </h4>
+                                <input type="text" class="form-control" disabled [value]="e.academy">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                วุฒิ :
+                                <input type="text" class="form-control" disabled [value]="e.qualification">
+                            </div>
+                            <div class="col-4">
+                                สาขา/แผนก :
+                                <input type="text" class="form-control" disabled [value]="e.department">
+                            </div>
+                            <div class="col-4">
+                                เกรดเฉลี่ย :
+                                <input type="text" class="form-control" disabled [value]="e.gpa">
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col"></div>
+                            <div class="col-2">
+                                <button class="btn btn-danger w-100" (click)="onDeleteEducation(e._id)">ลบ</button>    
+                            </div>
+                        </div>
+                        <hr>
+                    </form>
+                </div>
+                
+                <h3><b>เพิ่มข้อมูลการศึกษา</b></h3>
+                <form action="" [formGroup]="educationForm" class="mb-3">
+                    <div class="row mb-2">
+                        <div class="col-12">
+                            <h4>สถานศีกษา : </h4>
+                            <input type="text" class="form-control" formControlName="academy">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            วุฒิ :
+                            <input type="text" class="form-control" formControlName="qualification">
+                        </div>
+                        <div class="col-4">
+                            สาขา/แผนก :
+                            <input type="text" class="form-control" formControlName="department">
+                        </div>
+                        <div class="col-4">
+                            เกรดเฉลี่ย :
+                            <input type="text" class="form-control" formControlName="gpa">
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col"></div>
+                        <div class="col-2">
+                            <button class="btn btn-success w-100" (click)="onSaveEducation()">เพิ่ม</button>    
+                        </div>
+                        <div class="col-2">
+                            <button class="btn btn-warning w-100">ยกเลิก</button>
+                        </div>
+                    </div>
+                    <hr>
+                </form>
+            </div>
+        </div>
+    </div>

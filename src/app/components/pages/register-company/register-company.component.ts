@@ -55,7 +55,7 @@ export class RegisterCompanyComponent implements OnInit {
         })
       }else{
         let company = {
-          companyName:this.registerForm.value.companyName,
+          name:this.registerForm.value.companyName,
           email:this.registerForm.value.email,
           password:this.registerForm.value.password
         }

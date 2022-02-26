@@ -14,6 +14,15 @@ import { FooterComponent } from './components/shared/footer/footer.component';
 import { RegisterMemberComponent } from './components/pages/register-member/register-member.component';
 import { RegisterCompanyComponent } from './components/pages/register-company/register-company.component';
 import { ProfileComponent } from './components/pages/profile/profile.component';
+import { ProfileEditComponent } from './components/pages/profile-edit/profile-edit.component';
+import { JobPostComponent } from './components/pages/job-post/job-post.component';
+import { JobPostAddComponent } from './components/pages/job-post-add/job-post-add.component';
+import { JobRegisterComponent } from './components/pages/job-register/job-register.component';
+import { JobApplicantComponent } from './components/pages/job-applicant/job-applicant.component';
+import { JobDetailComponent } from './components/pages/job-detail/job-detail.component';
+import { JobPostEditComponent } from './components/pages/job-post-edit/job-post-edit.component';
+import { ViewCompanyComponent } from './components/pages/view-company/view-company.component';
+import { ViewMemberComponent } from './components/pages/view-member/view-member.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +34,16 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     FooterComponent,
     RegisterMemberComponent,
     RegisterCompanyComponent,
-    ProfileComponent
+    ProfileComponent,
+    ProfileEditComponent,
+    JobPostComponent,
+    JobPostAddComponent,
+    JobRegisterComponent,
+    JobApplicantComponent,
+    JobDetailComponent,
+    JobPostEditComponent,
+    ViewCompanyComponent,
+    ViewMemberComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +51,7 @@ import { ProfileComponent } from './components/pages/profile/profile.component';
     FormsModule,
     ReactiveFormsModule,
     SweetAlert2Module,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

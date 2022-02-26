@@ -8,9 +8,9 @@
         <div class="content p-5 container">
             <h1 class="title"><span>NVC</span> Job Market</h1>
             <div class="container search-box">
-                <form class="d-flex justify-content-center">
-                    <input class="search-text form-control" placeholder="ค้นหางาน" type="text">
-                    <button class="btn-search">ค้นหา</button>
+                <form class="d-flex justify-content-center" [formGroup]="searchForm">
+                    <input class="search-text form-control" placeholder="ค้นหางาน" type="text" formControlName="title">
+                    <button class="btn-search" (click)="onSearch()">ค้นหา</button>
                 </form>
             </div>
             <div class="container btn-box">
@@ -34,7 +34,7 @@
                             ไม่ว่าจะเป็น<br><span> งานประจำ งานพาร์ทไทม์ งานฟรีแลนซ์ </span>หรือ<span>
                                 ต้องหาสถานที่ฝึกงาน</span> เป็นต้น
                         </div>
-                        <a href="" class="btn-viewJob">ดูงานต่าง ๆ</a>
+                        <a routerLink="/jobpost" class="btn-viewJob">ดูงานต่าง ๆ</a>
                     </div>
                     <div class="col">
                         <div class="img-box rounded-circle"></div>

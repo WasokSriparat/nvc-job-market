@@ -1,0 +1,108 @@
+<div *ngIf="!statusMember">
+    <div class="container content">
+        <div class="container my-5">
+            <div class="post-content p-4">
+    
+                <div class="post-box container mb-5 p-4">
+                    <div class="row">
+                        <h1>โพสต์รับสมัคร</h1>
+                    </div>
+                    <hr>
+                    <form [formGroup]="jobPostForm">
+                        <div class="row mb-3">
+                            <div class="col-md-2 col-form-label">
+                                หัวข้อ :
+                            </div>
+                            <div class="col-md">
+                                <input class="form-control" type="text" formControlName="title">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2 col-form-label">
+                                วันที่เปิดรับ :
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="date" formControlName="startDate">
+                            </div>
+                            <div class="col-md-2 col-form-label">
+                                วันที่ปิดรับ :
+                            </div>
+                            <div class="col-md-4">
+                                <input class="form-control" type="date" formControlName="endDate">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2 col-form-label">
+                                สาขา/แผนกที่รับ :
+                            </div>
+                            <div class="col-md pt-2">
+                                <select name="" id="" class="form-select w-50" formControlName="department">
+                                    <option value="{{d.name}}" *ngFor="let d of departments">{{d.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <div class="col-md-2 col-form-label">
+                                ตำแหน่งที่รับ :
+                            </div>
+                            <div class="col-md pt-2">
+                               <select name="" id="" class="form-select w-50" formControlName="position" required>
+                                    <option value="{{p.name}}" *ngFor="let p of positions">{{p.name}}</option>
+                               </select>
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <div class="col-md-2 col-form-label">
+                                อายุ :
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" type="text" formControlName="ageMin">
+                            </div>
+                            <div class="col-md-2 col-form-label">
+                                ถึง :
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" type="text" formControlName="ageMax">
+                            </div>
+                        </div>
+    
+                        <div class="row mb-3">
+                            <div class="col-md-2 col-form-label">
+                                เงินเดือน :
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" type="text" formControlName="salaryMin">
+                            </div>
+                            <div class="col-md-2 col-form-label">
+                                ถึง :
+                            </div>
+                            <div class="col-md-2">
+                                <input class="form-control" type="text" formControlName="salaryMax">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-2 col-form-label">
+                                คำอธิบาย :
+                            </div>
+                            <div class="col-md">
+                                <textarea class="form-control" rows="3" formControlName="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="row my-4">
+                            <div class="col-md-2"></div>
+                            <div class="col-4">
+                                <button class="btn btn-success w-100" (click)="onSavePost()">บันทึก</button>
+                            </div>
+                            <div class="col-4">
+                                <button class="btn btn-danger w-100">ยกเลิก</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-main *ngIf="statusMember"></app-main>

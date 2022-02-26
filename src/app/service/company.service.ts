@@ -26,4 +26,30 @@ export class CompanyService {
         return res;
       }));
   }
+
+  getCompanies() : any{
+    return this.http.get<any>(this.url);
+  }
+
+  getCompanyById(id:any){
+    let getUrl = `${this.url}/${id}`;
+    return this.http.get<any>(getUrl);
+  }
+
+  updateCompany(id:any,company:any){
+    let getUrl = `${this.url}/${id}`;
+    return this.http.put<any>(getUrl,company)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
+  updateAddress(id:any,address:any){
+    let getUrl = `${this.url}/address/update/${id}`;
+    return this.http.patch<any>(getUrl,address)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
 }

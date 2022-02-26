@@ -12,14 +12,20 @@
                     <a class="nav-link" routerLink="/">หน้าหลัก <span class="visually-hidden">(current)</span></a>
                 </li>
                 <li class="nav-item mx-2">
-                    <a class="nav-link" routerLink="/">ค้นหางาน</a>
+                    <a class="nav-link" routerLink="/jobpost/search">ค้นหางาน</a>
                 </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" routerLink="/">งานที่สมัคร</a>
+                <li class="nav-item mx-2" *ngIf="statusMember">
+                    <a class="nav-link" routerLink="/jobpost/register">งานที่สมัคร</a>
                 </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link" routerLink="/">โพสต์รับสมัครงาน</a>
-                </li>
+                <li class="nav-item dropdown" *ngIf="statusCompany">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      จัดการโพสต์
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdown04">
+                        <li><a class="dropdown-item" routerLink="">ดูรายการโพสต์</a></li>
+                        <li><a class="dropdown-item" routerLink="/jobpost/add">เพิ่มโพสต์รับสมัครงาน</a></li>
+                    </ul>
+                  </li>
             </ul>
             <hr>
             <div class="btn-login-regis d-flex" *ngIf="!isLoggedIn">
@@ -31,10 +37,11 @@
                 <div class="profile-menu d-flex" href="#" id="dropdown04" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     <img class="border rounded-circle" style="width: 40px; height: 40px;" src="../../../../assets/images/NullProfile.png" alt="">
-                    <h5 class="mx-3 mt-2">{{ currentUser.firstName }}</h5>
+                    <h5 class="mx-3 mt-2">{{userName}}</h5>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdown04">
                     <li><a class="dropdown-item" routerLink="/profile">ข้อมูลส่วนตัว</a></li>
+                    <li><a class="dropdown-item" routerLink="/profile/edit">แก้ไข ข้อมูลส่วนตัว</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" (click)="logout()">ออกจากระบบ</a></li>
                 </ul>

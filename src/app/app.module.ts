@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { HttpClientModule } from '@angular/common/http';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,8 @@ import { JobDetailComponent } from './components/pages/job-detail/job-detail.com
 import { JobPostEditComponent } from './components/pages/job-post-edit/job-post-edit.component';
 import { ViewCompanyComponent } from './components/pages/view-company/view-company.component';
 import { ViewMemberComponent } from './components/pages/view-member/view-member.component';
+import { BrowserAnimationsModule,NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CompanyPostComponent } from './components/pages/company-post/company-post.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +48,7 @@ import { ViewMemberComponent } from './components/pages/view-member/view-member.
     JobPostEditComponent,
     ViewCompanyComponent,
     ViewMemberComponent,
+    CompanyPostComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +57,10 @@ import { ViewMemberComponent } from './components/pages/view-member/view-member.
     ReactiveFormsModule,
     SweetAlert2Module,
     HttpClientModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

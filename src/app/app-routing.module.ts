@@ -16,6 +16,7 @@ import { RegisterComponent } from './components/pages/register/register.componen
 import { ViewMemberComponent } from './components/pages/view-member/view-member.component';
 import { ViewCompanyComponent } from './components/pages/view-company/view-company.component';
 import { AuthGuard } from './guard/auth.guard';
+import { CompanyPostComponent } from './components/pages/company-post/company-post.component';
 
 const routes: Routes = [
   { path: "", component: MainComponent },
@@ -28,10 +29,11 @@ const routes: Routes = [
   { path: "jobpost/search", component: JobPostComponent },
   { path: "jobpost/search/:title", component: JobPostComponent },
   { path: "jobpost/add", component: JobPostAddComponent, canActivate: [AuthGuard] },
-  { path: "jobpost/edit", component: JobPostEditComponent, canActivate: [AuthGuard] },
+  { path: "jobpost/edit/:id", component: JobPostEditComponent, canActivate: [AuthGuard] },
   { path: "jobpost/detail/:id", component: JobDetailComponent },
   { path: "jobpost/register", component: JobRegisterComponent, canActivate: [AuthGuard] },
   { path: "jobpost/applicant", component: JobApplicantComponent, canActivate: [AuthGuard] },
+  {path: "jobpost/company/:id",component: CompanyPostComponent},
   { path: "profile/member/:id", component: ViewMemberComponent },
   { path: "profile/company/:id", component: ViewCompanyComponent }
 ];

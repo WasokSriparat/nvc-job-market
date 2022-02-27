@@ -1,15 +1,21 @@
 .content{
     position: relative;
+    /* height: 900px; */
     height: auto;
-    padding: 25px 25px;
+    padding: 100px 25px;
+}
+.search-box{
+    width: 800px;
+}
+.search-box input{
+    border-radius: 25px;
 }
 
 .post-box{
     width: 75%;
     height: auto;
-    border-radius: 5px;
+    border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    font-size: 18px;
 }
 
 .img-box{

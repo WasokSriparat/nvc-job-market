@@ -90,38 +90,29 @@ export class JobPostAddComponent implements OnInit {
         title: 'Warning',
         text: 'กรุณากรอกข้อมูลครบ'
       })
+    }else{
+      console.log(jobpost);
+      this.jobPostService.addJobPost(jobpost).subscribe((res)=>{
+        
+        if(res.msg == "Post Complete"){
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'เพิ่มสำเร็จ'
+          })
+          this.router.navigate([`/jobpost/company/${this.currentUser._id}`]);
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'error',
+            text: 'เพิ่มไม่สำเร็จ'
+          })
+          this.router.navigate(["/jobpost/add"]);
+        }
+      });
     }
 
-    if(this.jobPostForm.value.ageMin != Number ||
-      this.jobPostForm.value.ageMax != Number ||
-      this.jobPostForm.value.salaryMin != Number ||
-      this.jobPostForm.value.salaryMax != Number ){
-        Swal.fire({
-          icon: 'warning',
-          title: 'Warning',
-          text: 'กรุณากรอกข้อมูล อายุ และ เงินเดือน เป็นตัวเลข'
-        })
-      }
-
-    console.log(jobpost);
-    this.jobPostService.addJobPost(jobpost).subscribe((res)=>{
-      
-      if(res.msg == "Post Complete"){
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: 'เพิ่มสำเร็จ'
-        })
-        this.router.navigate(["/jobpost"]);
-      }else{
-        Swal.fire({
-          icon: 'error',
-          title: 'error',
-          text: 'เพิ่มไม่สำเร็จ'
-        })
-        this.router.navigate(["/jobpost/add"]);
-      }
-    });
+    
   }
 
 }

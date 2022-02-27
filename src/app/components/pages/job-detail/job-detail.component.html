@@ -19,11 +19,17 @@
                             {{currentPost?.createdAt | date:"dd / MM / yyyy : HH.mm" }}
                         </div>
                     </div>
-                    <div class="col-2 py-2">
-                        <div class="btn btn-success" data-bs-toggle="modal" data-bs-target="#apply"
-                            *ngIf="statusMember">สมัคร</div>
-                        <div class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit" *ngIf="statusEditer">
-                            แก้ไข</div>
+                    <div class="col-2">
+                        <h5 class="text-success text-center" *ngIf="postActive"><b>เปิดรับสมัคร</b></h5>
+                        <h5 class="text-danger text-center" *ngIf="!postActive"><b>ปิดรับสมัคร</b></h5>
+                        <div class="d-flex justify-content-center" *ngIf="statusEditer">
+                            <div class="btn btn-outline-success" (click)="changeStatus()" *ngIf="!postActive">
+                                เปิดรับสมัคร
+                            </div>
+                            <div class="btn btn-outline-danger" (click)="changeStatus()" *ngIf="postActive">
+                                ปิดรับสมัคร
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <hr>
@@ -60,38 +66,113 @@
                     <p class="col-6">อายุ : {{currentPost?.ageMin}} - {{currentPost?.ageMax}} </p>
                     <p class="col-6">เงินเดือน : {{currentPost?.salaryMin}} - {{currentPost?.salaryMax}} </p>
                 </div>
-                <div class="row mb-5">
+                <div class="row mb-2">
                     <h5>คำอธิบาย : </h5>
                     <p class="m-0">{{currentPost?.description}}</p>
+                </div>
+
+                <div class="row">
+                    <div class="col py-2">
+                        <div class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#apply"
+                            *ngIf="statusMember">สมัคร</div>
+                        <div class="w-100 row" *ngIf="statusEditer">
+                            <div class="col"></div>
+                            <div class="col d-flex justify-content-center">
+                                <div class=" btn mx-auto btn-warning" style="width: 40%;"  routerLink="/jobpost/edit/{{currentPost?._id}}">
+                                    แก้ไขโพสต์</div>
+                                <div class=" btn mx-auto btn-danger"  style="width: 40%;" (click)="onDelete()">
+                                    ลบโพสต์</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <hr>
 
                 <div class="row" *ngIf="statusEditer">
                     <h3>รายการผู้สมัคร</h3>
-                    <div class="col-12">
-                        <div class="row m-0 border-bottom border-top border-dark py-2">
-                            <div class="col-1 text-center"><b>ลำดับ</b></div>
-                            <div class="col text-center"><b>ชื่อ - นามสกุล</b></div>
-                            <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
-                            <div class="col text-center"><b>รายละเอียด</b></div>
-                            <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
-                        </div>
-                        <div style="height: 300px;" class="overflow-scroll">
-                            <div class="row m-0 border-bottom py-2 align-items-center" *ngFor="let item of positions , let i = index">
-                                <div class="col-1 text-center"><b>{{i+1}}</b></div>
-                                <div class="col text-start">ก้องภพ</div>
-                                <div class="col-2 text-center">26/02/2565</div>
-                                <div class="col d-flex justify-content-center">
-                                    <button class="btn btn-outline-primary" type="button">ดูรายละเอียด</button>
+                    <mat-tab-group>
+                        <mat-tab label="รอยืนยัน">
+                            <div class="col-12" id="list">
+                                <div class="row m-0 border-bottom py-2">
+                                    <div class="col-1 text-center"><b>ลำดับ</b></div>
+                                    <div class="col-3 text-center"><b>ชื่อ - นามสกุล</b></div>
+                                    <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
+                                    <div class="col-3 text-center"><b>รายละเอียด</b></div>
+                                    <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
                                 </div>
-                                <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
-                                    <button class="btn btn-success mx-auto " style="width: 40%;">ผ่าน</button>
-                                    <button class="btn btn-danger mx-auto " style="width: 40%;">ไม่ผ่าน</button>
+                                <div style="height: 300px;" class="overflow-scroll">
+                                    <div class="row m-0 border-bottom py-2 align-items-center"
+                                        *ngFor="let a of currentPost?.applicants , let i = index">
+                                        <div class="col-1 text-center"><b>{{i+1}}</b></div>
+                                        <div class="col-3 text-start">ก้องภพ</div>
+                                        <div class="col-2 text-center">26/02/2565</div>
+                                        <div class="col-3 d-flex justify-content-center">
+                                            <button class="btn btn-outline-primary" type="button">ดูรายละเอียด</button>
+                                        </div>
+                                        <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
+                                            <button class="btn btn-success mx-auto " style="width: 40%;">ผ่าน</button>
+                                            <button class="btn btn-danger mx-auto " style="width: 40%;">ไม่ผ่าน</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
+                        </mat-tab>
+                        <mat-tab label="ผ่าน">
+                            <div class="col-12" id="pass">
+                                <div class="row m-0 border-bottom py-2">
+                                    <div class="col-1 text-center"><b>ลำดับ</b></div>
+                                    <div class="col text-center"><b>ชื่อ - นามสกุล</b></div>
+                                    <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
+                                    <div class="col text-center"><b>รายละเอียด</b></div>
+                                    <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
+                                </div>
+                                <div style="height: 300px;" class="overflow-scroll">
+                                    <div class="row m-0 border-bottom py-2 align-items-center"
+                                        *ngFor="let item of positions , let i = index">
+                                        <div class="col-1 text-center"><b>{{i+1}}</b></div>
+                                        <div class="col text-start">ก้องภพ</div>
+                                        <div class="col-2 text-center">26/02/2565</div>
+                                        <div class="col d-flex justify-content-center">
+                                            <button class="btn btn-outline-primary" type="button">ดูรายละเอียด</button>
+                                        </div>
+                                        <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
+                                            <b class="text-success">ผ่าน</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="ไม่ผ่าน">
+                            <div class="col-12" id="pass">
+                                <div class="row m-0 border-bottom py-2">
+                                    <div class="col-1 text-center"><b>ลำดับ</b></div>
+                                    <div class="col text-center"><b>ชื่อ - นามสกุล</b></div>
+                                    <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
+                                    <div class="col text-center"><b>รายละเอียด</b></div>
+                                    <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
+                                </div>
+                                <div style="height: 300px;" class="overflow-scroll">
+                                    <div class="row m-0 border-bottom py-2 align-items-center"
+                                        *ngFor="let item of positions , let i = index">
+                                        <div class="col-1 text-center"><b>{{i+1}}</b></div>
+                                        <div class="col text-start">ก้องภพ</div>
+                                        <div class="col-2 text-center">26/02/2565</div>
+                                        <div class="col d-flex justify-content-center">
+                                            <button class="btn btn-outline-primary" type="button">ดูรายละเอียด</button>
+                                        </div>
+                                        <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
+                                            <b class="text-danger">ไม่ผ่าน</b>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+
+
+
+
                 </div>
 
             </div>
@@ -116,24 +197,6 @@
                                 <input type="text" class="form-control">
                             </div>
                             <div class="row mb-3">
-                                สาขา/แผนกที่สมัคร :
-                                <div class="row">
-                                    <select name="" id="" class="form-select w-50" formControlName="department">
-                                        <option value="{{d.name}}" *ngFor="let d of departments">{{d.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                ตำแหน่งที่สมัคร :
-                                <div class="row">
-                                    <select name="" id="" class="form-select w-50" formControlName="position">
-                                        <option value="{{p.name}}" *ngFor="let p of positions">{{p.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
                                 สาเหตุที่อยากทำงานนี้ ? :
                                 <textarea class="form-control" rows="3"></textarea>
                             </div>
@@ -146,62 +209,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                        <button type="button" class="btn btn-primary">ยืนยัน</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal fade" id="edit" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">แก้ไขโพสต์</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body p-3">
-                        <form action="" class="p-4">
-                            <div class="row mb-3">
-                                ขื่อ :
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="row mb-3">
-                                นามสกุล :
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="row mb-3">
-                                สาขา/แผนก :
-                                <div class="row">
-                                    <select name="" id="" class="form-select w-50" formControlName="department">
-                                        <option value="{{d.name}}" *ngFor="let d of departments">{{d.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                ตำแหน่ง :
-                                <div class="row">
-                                    <select name="" id="" class="form-select w-50" formControlName="position">
-                                        <option value="{{p.name}}" *ngFor="let p of positions">{{p.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="row mb-3">
-                                สาเหตุที่อยากทำงานนี้ ? :
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-
-                            <div class="row mb-3">
-                                แนบเอกสาร ( resume , portfolio ) :
-                                <input type="file" name="" class="form-control" id="">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                        <button type="button" class="btn btn-primary">ยืนยัน</button>
+                        <button type="button" class="btn btn-success">ยืนยัน</button>
                     </div>
                 </div>
             </div>

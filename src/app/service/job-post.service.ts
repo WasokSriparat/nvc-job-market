@@ -25,6 +25,11 @@ export class JobPostService {
     return this.http.get<any>(getUrl);
   }
 
+  getJobPostByCompanyId(id:any){
+    let getUrl = `${this.url}/company/${id}`;
+    return this.http.get<any>(getUrl);
+  }
+
   addJobPost(jobPost:any){
     return this.http.post<any>(this.url,jobPost)
     .pipe(map((res)=>{
@@ -32,8 +37,9 @@ export class JobPostService {
     }))
   }
 
-  updateJobPost(jobPost:any){
-    return this.http.put<any>(this.url,jobPost)
+  updateJobPost(id:any,jobPost:any){
+    let getUrl = `${this.url}/${id}`;
+    return this.http.put<any>(getUrl,jobPost)
     .pipe(map((res)=>{
       return res;
     }))
@@ -46,8 +52,9 @@ export class JobPostService {
     }))
   }
 
-  updateStatus(status:any){
-    return this.http.patch<any>(this.url,status)
+  updatePostStatus(id:any){
+    let getUrl = `${this.url}/update/status/${id}`
+    return this.http.patch<any>(getUrl,null)
     .pipe(map((res)=>{
       return res;
     }))

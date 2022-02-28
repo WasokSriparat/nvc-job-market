@@ -15,7 +15,6 @@ import Swal from 'sweetalert2';
 export class JobDetailComponent implements OnInit {
 
   isLoggedIn = false;
-  editPostForm!: FormGroup;
   applicantForm!: FormGroup;
   currentPost:any;
   currentUser:any;
@@ -25,7 +24,7 @@ export class JobDetailComponent implements OnInit {
   statusMember = false;
   statusEditer = false;
   statusPoster = false;
-  postActive!: Boolean;
+  postActive = true;
 
   constructor(
     private jobPostService: JobPostService,
@@ -44,20 +43,22 @@ export class JobDetailComponent implements OnInit {
 
       if (this.currentUser.category == "member"){
         this.statusMember = true;
+
+        this.applicantForm = new FormGroup({
+          firstName: new FormControl(),
+          lastName: new FormControl(),
+          description: new FormControl()
+          
+        })
+
+        this.applicantForm.controls['firstName'].setValue(this.currentUser?.firstName);
+        this.applicantForm.controls['lastName'].setValue(this.currentUser?.lastName);
+
       }else if(this.currentUser?.category == 'admin'){
         this.statusEditer = true;
       }
 
     }
-
-    this.departmentService.getDepartments().subscribe((res:any)=>{
-      this.departments = res.data;
-    });
-
-    this.positionService.getPositions().subscribe((res:any)=>{
-      this.positions =  res.data;
-      
-    });
 
     this.activatedRouter.params.subscribe((params)=>{
       this.id = params['id'];
@@ -72,30 +73,18 @@ export class JobDetailComponent implements OnInit {
         this.statusPoster = true;
       }
 
-      this.editPostForm = new FormGroup({
-        title: new FormControl(),
-        startDate: new FormControl(),
-        endDate: new FormControl(),
-        ageMin: new FormControl(),
-        ageMax: new FormControl(),
-        salaryMin: new FormControl(),
-        salaryMax: new FormControl(),
-        description: new FormControl(),
-        department: new FormControl(),
-        position: new FormControl()
-      })
-      this.editPostForm.controls['title'].setValue(this.currentPost?.title);
-      this.editPostForm.controls['startDate'].setValue(this.currentPost?.startDate);
-      this.editPostForm.controls['endDate'].setValue(this.currentPost?.endDate);
-      this.editPostForm.controls['ageMin'].setValue(this.currentPost?.ageMin);
-      this.editPostForm.controls['ageMax'].setValue(this.currentPost?.ageMax);
-      this.editPostForm.controls['salaryMin'].setValue(this.currentPost?.salaryMin);
-      this.editPostForm.controls['salaryMax'].setValue(this.currentPost?.salaryMax);
-      this.editPostForm.controls['description'].setValue(this.currentPost?.description);
-      this.editPostForm.controls['department'].setValue(this.currentPost?.department);
-      this.editPostForm.controls['position'].setValue(this.currentPost?.position);
-
     })
+
+    this.departmentService.getDepartments().subscribe((res:any)=>{
+      this.departments = res.data;
+    });
+
+    this.positionService.getPositions().subscribe((res:any)=>{
+      this.positions =  res.data;
+      
+    });
+
+    
 
   }
 
@@ -148,6 +137,35 @@ export class JobDetailComponent implements OnInit {
           Swal.fire(
             'Update!',
             text,
+            'success'
+          )
+          window.location.reload();
+        })
+      }
+    })
+  }
+
+  onApply(){
+    let applicant = {
+      member_id: this.currentUser._id,
+      memberName: `${this.applicantForm.value.firstName} ${this.applicantForm.value.lastName}`,
+      description: this.applicantForm.value.description
+    }
+    Swal.fire({
+      title: "คุณต้องการสมัครงานนี้หรือไม่ ?",
+      text: "",
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      cancelButtonText: 'ยกเลิก',
+      confirmButtonText: 'ยืนยัน'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.jobPostService.addApplicant(this.id,applicant).subscribe((res)=>{
+          Swal.fire(
+            'Success!',
+            "สมัครสำเร็จ",
             'success'
           )
           window.location.reload();

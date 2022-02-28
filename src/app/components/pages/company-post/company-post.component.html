@@ -13,66 +13,136 @@
     </div> -->
     <div class="container my-5">
         <div class="post-content p-4">
-
-            <div class="post-box container mb-5 p-4" *ngFor="let p of jobPosts">
-                <div class="row">
-                    <div class="col-2 px-auto d-flex justify-content-center">
-                        <div class="img-box border rounded-circle">
-                            <img src="../../../../assets/images/NullProfile.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col py-2">
-                        <div class="row">
-                            <a class="m-0 p-0 text-decoration-none" routerLink="/profile/company/{{p.company_id}}"><b class="m-0 p-0" >{{p.companyName}}</b></a>
-                        </div>
-                        <div class="row">
-                            {{p.createdAt | date:"dd / MM / yyyy : HH.mm" }}
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <h5 class="text-success text-center" *ngIf="p.postStatus"><b>เปิดรับสมัคร</b></h5>
-                        <h5 class="text-danger text-center" *ngIf="!p.postStatus"><b>ปิดรับสมัคร</b></h5>
-                    </div>
-                </div>
-                <hr>
-                <div class="row mb-4">
-                    <div class="col-12">
-                        <div class="row">
-                            <h3>{{p.title}}</h3>
-                        </div>
-                        <div class="row">
-                            <p class="m-0">ตั้งแต่วันที่ {{p.startDate | date:"dd / MM / yyyy " }} ถึง {{p.endDate | date:"dd / MM / yyyy " }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <div class="col-6">
-                        <h5>สาขา/แผนก</h5>
-                        <div class="row">
-                            <div class="col">
-                                {{p.department}}
+            <mat-tab-group  mat-align-tabs="center">
+                <mat-tab label="เปิดรับสมัคร">
+                    <div *ngFor="let p of jobPosts">
+                        <div class="post-box container mb-5 p-4" *ngIf="p.postStatus">
+                            <div class="row">
+                                <div class="col-2 px-auto d-flex justify-content-center">
+                                    <div class="img-box border rounded-circle">
+                                        <img src="../../../../assets/images/NullProfile.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="col py-2">
+                                    <div class="row">
+                                        <a class="m-0 p-0 text-decoration-none" routerLink="/profile/company/{{p.company_id}}"><b class="m-0 p-0" >{{p.companyName}}</b></a>
+                                    </div>
+                                    <div class="row">
+                                        {{p.createdAt | date:"dd / MM / yyyy : HH.mm" }}
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <h5 class="text-success text-center" *ngIf="p.postStatus"><b>เปิดรับสมัคร</b></h5>
+                                    <h5 class="text-danger text-center" *ngIf="!p.postStatus"><b>ปิดรับสมัคร</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <h3>{{p.title}}</h3>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0">ตั้งแต่วันที่ {{p.startDate | date:"dd / MM / yyyy " }} ถึง {{p.endDate | date:"dd / MM / yyyy " }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <h5>สาขา/แผนก</h5>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{p.department}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h5>ตำแหน่ง</h5>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{p.position}}
+                                        </div>                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <p class="col-6">อายุ : {{p.ageMin}} - {{p.ageMax}} </p>
+                                <p class="col-6">เงินเดือน : {{p.salaryMin}} - {{p.salaryMax}} </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 py-2">
+                                    <div routerLink="/jobpost/detail/{{p._id}}" class="btn btn-outline-primary w-100">ดูเพิ่มเติม</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <h5>ตำแหน่ง</h5>
-                        <div class="row">
-                            <div class="col">
-                                {{p.position}}
-                            </div>                            
+                </mat-tab>
+                <mat-tab label="ปิดรับสมัคร">
+                    <div *ngFor="let p of jobPosts">
+                        <div class="post-box container mb-5 p-4" *ngIf="!p.postStatus">
+                            <div class="row">
+                                <div class="col-2 px-auto d-flex justify-content-center">
+                                    <div class="img-box border rounded-circle">
+                                        <img src="../../../../assets/images/NullProfile.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="col py-2">
+                                    <div class="row">
+                                        <a class="m-0 p-0 text-decoration-none" routerLink="/profile/company/{{p.company_id}}"><b class="m-0 p-0" >{{p.companyName}}</b></a>
+                                    </div>
+                                    <div class="row">
+                                        {{p.createdAt | date:"dd / MM / yyyy : HH.mm" }}
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <h5 class="text-success text-center" *ngIf="p.postStatus"><b>เปิดรับสมัคร</b></h5>
+                                    <h5 class="text-danger text-center" *ngIf="!p.postStatus"><b>ปิดรับสมัคร</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-4">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <h3>{{p.title}}</h3>
+                                    </div>
+                                    <div class="row">
+                                        <p class="m-0">ตั้งแต่วันที่ {{p.startDate | date:"dd / MM / yyyy " }} ถึง {{p.endDate | date:"dd / MM / yyyy " }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-6">
+                                    <h5>สาขา/แผนก</h5>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{p.department}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <h5>ตำแหน่ง</h5>
+                                    <div class="row">
+                                        <div class="col">
+                                            {{p.position}}
+                                        </div>                            
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <p class="col-6">อายุ : {{p.ageMin}} - {{p.ageMax}} </p>
+                                <p class="col-6">เงินเดือน : {{p.salaryMin}} - {{p.salaryMax}} </p>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 py-2">
+                                    <div routerLink="/jobpost/detail/{{p._id}}" class="btn btn-outline-primary w-100">ดูเพิ่มเติม</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <p class="col-6">อายุ : {{p.ageMin}} - {{p.ageMax}} </p>
-                    <p class="col-6">เงินเดือน : {{p.salaryMin}} - {{p.salaryMax}} </p>
-                </div>
-                <div class="row">
-                    <div class="col-12 py-2">
-                        <div routerLink="/jobpost/detail/{{p._id}}" class="btn btn-outline-primary w-100">ดูเพิ่มเติม</div>
-                    </div>
-                </div>
-            </div>
+                </mat-tab>
+                
+            </mat-tab-group>
+            
             
         </div>
     </div>

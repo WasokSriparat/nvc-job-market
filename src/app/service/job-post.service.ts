@@ -45,8 +45,9 @@ export class JobPostService {
     }))
   }
 
-  addApplicant(applicant:any){
-    return this.http.patch<any>(this.url,applicant)
+  addApplicant(id:any,applicant:any){
+    let getUrl = `${this.url}/applicant/add/${id}`;
+    return this.http.patch<any>(getUrl,applicant)
     .pipe(map((res)=>{
       return res;
     }))

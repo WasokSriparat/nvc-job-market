@@ -16,6 +16,7 @@
     height: auto;
     border-radius: 15px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    font-size: 18px;
 }
 
 .img-box{
@@ -27,3 +28,4 @@
     width: 100%;
     height: 100%;
 }
+

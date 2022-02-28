@@ -74,7 +74,7 @@
                 <div class="row">
                     <div class="col py-2">
                         <div class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#apply"
-                            *ngIf="statusMember">สมัคร</div>
+                            *ngIf="statusMember && postActive">สมัคร</div>
                         <div class="w-100 row" *ngIf="statusEditer">
                             <div class="col"></div>
                             <div class="col d-flex justify-content-center">
@@ -187,29 +187,29 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-3">
-                        <form action="" class="p-4">
+                        <form [formGroup]="applicantForm" class="p-4">
                             <div class="row mb-3">
                                 ขื่อ :
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" formControlName="firstName">
                             </div>
                             <div class="row mb-3">
                                 นามสกุล :
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" formControlName="lastName">
                             </div>
                             <div class="row mb-3">
                                 สาเหตุที่อยากทำงานนี้ ? :
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" rows="3" formControlName="description"></textarea>
                             </div>
 
                             <div class="row mb-3">
                                 แนบเอกสาร ( resume , portfolio ) :
-                                <input type="file" name="" class="form-control" id="">
+                                <input type="file" name="" class="form-control" id="" >
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">ยกเลิก</button>
-                        <button type="button" class="btn btn-success">ยืนยัน</button>
+                        <button type="button" class="btn btn-success" (click)="onApply()">ยืนยัน</button>
                     </div>
                 </div>
             </div>

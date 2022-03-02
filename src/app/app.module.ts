@@ -28,6 +28,9 @@ import { ViewMemberComponent } from './components/pages/view-member/view-member.
 import { BrowserAnimationsModule,NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CompanyPostComponent } from './components/pages/company-post/company-post.component';
 import { AuthInterceptor } from './helper/auth.interceptor';
+import { ListCompanyComponent } from './components/pages/list-company/list-company.component';
+import { ListMemberComponent } from './components/pages/list-member/list-member.component';
+import { ListDepartAndPositionComponent } from './components/pages/list-depart-and-position/list-depart-and-position.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +53,9 @@ import { AuthInterceptor } from './helper/auth.interceptor';
     ViewCompanyComponent,
     ViewMemberComponent,
     CompanyPostComponent,
+    ListCompanyComponent,
+    ListMemberComponent,
+    ListDepartAndPositionComponent,
   ],
   imports: [
     BrowserModule,

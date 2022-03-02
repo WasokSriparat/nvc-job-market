@@ -17,6 +17,9 @@ import { ViewMemberComponent } from './components/pages/view-member/view-member.
 import { ViewCompanyComponent } from './components/pages/view-company/view-company.component';
 import { AuthGuard } from './guard/auth.guard';
 import { CompanyPostComponent } from './components/pages/company-post/company-post.component';
+import { ListCompanyComponent } from './components/pages/list-company/list-company.component';
+import { ListDepartAndPositionComponent } from './components/pages/list-depart-and-position/list-depart-and-position.component';
+import { ListMemberComponent } from './components/pages/list-member/list-member.component';
 
 const routes: Routes = [
   { path: "", component: MainComponent },
@@ -35,7 +38,10 @@ const routes: Routes = [
   { path: "jobpost/applicant", component: JobApplicantComponent, canActivate: [AuthGuard] },
   {path: "jobpost/company",component: CompanyPostComponent, canActivate: [AuthGuard] },
   { path: "profile/member/:id", component: ViewMemberComponent },
-  { path: "profile/company/:id", component: ViewCompanyComponent }
+  { path: "profile/company/:id", component: ViewCompanyComponent },
+  {path:"manage/company",component: ListCompanyComponent, canActivate: [AuthGuard] },
+  {path:"manage/member",component: ListMemberComponent, canActivate: [AuthGuard] },
+  {path:"manage/departmentAndPosition",component: ListDepartAndPositionComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

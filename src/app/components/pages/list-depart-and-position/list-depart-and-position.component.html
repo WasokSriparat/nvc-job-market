@@ -1,0 +1,126 @@
+<div *ngIf="statusAdmin">
+    <div class="container pt-5">
+        <div class="row p-3 mt-5">
+            <div class="col mb-5 box">
+                <div class="row mb-3">
+                    <h3><b>จัดการสาขา / แผนก</b></h3>
+                </div>
+                <div class="row py-3 px-2">
+                    <div class="row mb-2 border-dark border-bottom">
+                        <div class="col-2">
+                            <h5><b>ลำดับ</b></h5>
+                        </div>
+                        <div class="col-7">
+                            <h5><b>ชื่อสาขา / แผนก</b></h5>
+                        </div>
+                        <div class="col-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class=" overflow-scroll" style="height: 300px;">
+                        <div class="row align-items-center border-bottom py-2 my-2" *ngFor="let d of departments,let i = index">
+                            <div class="col-2 text-center">
+                                <b>{{i+1}}</b>
+                            </div>
+                            <div class="col-6">
+                                {{d.name}}
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-outline-warning" (click)="editDepartment(d._id)">
+                                    แก้ไข
+                                </button>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-outline-danger" (click)="deleteDepartment(d._id)">
+                                    ลบ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <form [formGroup]="departmentForm" class="row">
+                        <div class="col-3  d-flex align-items-center">
+                            <label class="text-end w-100" for=""><b>ชื่อสาขา / แผนก : </b></label>
+                        </div>
+                        <div class="col-5">
+                            <input type="hidden" name="" formControlName="departmentId">
+                            <input type="text" class="form-control" formControlName="departmentName">
+                        </div>
+                        <div class="col-3" *ngIf="!statusEditDepartment">
+                            <button class="btn btn-outline-success" (click)="onAddDepartment()">เพิ่ม</button>
+                        </div>
+                        <div class="col" *ngIf="statusEditDepartment">
+                            <button class="btn btn-success me-2" (click)="updateDepartment()">บันทึก</button>
+                            <button class="btn btn-outline-secondary" (click)="cancelEditDepartment()">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-1"></div>
+            <div class="col mb-5 box">
+                <div class="row mb-3">
+                    <h3><b>จัดการตำแหน่ง</b></h3>
+                </div>
+                <div class="row py-3 px-2">
+                    <div class="row mb-2 border-dark border-bottom">
+                        <div class="col-2">
+                            <h5><b>ลำดับ</b></h5>
+                        </div>
+                        <div class="col-7">
+                            <h5><b>ชื่อตำแหน่ง</b></h5>
+                        </div>
+                        <div class="col-2">
+                            &nbsp;
+                        </div>
+                        <div class="col-1">
+                            &nbsp;
+                        </div>
+                    </div>
+                    <div class=" overflow-scroll" style="height: 300px;">
+                        <div class="row align-items-center border-bottom py-2 my-2" *ngFor="let p of positions,let i = index">
+                            <div class="col-2 text-center">
+                                <b>{{i+1}}</b>
+                            </div>
+                            <div class="col-6">
+                                {{p.name}}
+                            </div>
+                            <div class="col-2">
+                                <button class="btn btn-outline-warning" (click)="editPosition(p._id)">
+                                    แก้ไข
+                                </button>
+                            </div>
+                            <div class="col-1">
+                                <button class="btn btn-outline-danger" (click)="deletePosition(p._id)">
+                                    ลบ
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <form [formGroup]="positionForm" class="row">
+                        <div class="col-3  d-flex align-items-center">
+                            <label class="text-end w-100" for=""><b>ชื่อตำแหน่ง : </b></label>
+                        </div>
+                        <div class="col-5">
+                            <input type="hidden" name="" formControlName="positionId">
+                            <input type="text" class="form-control" formControlName="positionName">
+                        </div>
+                        <div class="col-3" *ngIf="!statusEditPosition">
+                            <button class="btn btn-outline-success" (click)="onAddPosition()">เพิ่ม</button>
+                        </div>
+                        <div class="col" *ngIf="statusEditPosition">
+                            <button class="btn btn-success me-2" (click)="updatePosition()">บันทึก</button>
+                            <button class="btn btn-outline-secondary" (click)="cancelEditPosition()">ยกเลิก</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-main *ngIf="!statusAdmin"></app-main>

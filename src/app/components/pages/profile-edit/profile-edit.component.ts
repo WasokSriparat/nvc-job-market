@@ -131,7 +131,7 @@ export class ProfileEditComponent implements OnInit {
 
       let company = {
         name: this.infoForm.value.companyName,
-        email: this.infoForm.value.email,
+        email: this.currentUser.email,
         phoneNumber: this.infoForm.value.phoneNumber,
         description: this.infoForm.value.description,
       }
@@ -156,7 +156,6 @@ export class ProfileEditComponent implements OnInit {
     } else {
       this.infoForm.controls['companyName'].setValue(this.currentUser.name);
     }
-    this.infoForm.controls['email'].setValue(this.currentUser.email);
     this.infoForm.controls['phoneNumber'].setValue(this.currentUser.phoneNumber);
     this.infoForm.controls['description'].setValue(this.currentUser.description);
   }

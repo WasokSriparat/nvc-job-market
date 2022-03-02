@@ -68,4 +68,12 @@ export class MemberService {
     }));
   }
 
+  deleteMember(id:any){
+    let getUrl = `${this.url}/${id}`;
+    return this.http.delete<any>(getUrl)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
 }

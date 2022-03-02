@@ -69,11 +69,8 @@ export class JobPostEditComponent implements OnInit {
 
       if(this.currentPost.company_id == this.currentUser?._id ){
         this.statusEditer = true;
-      }else{
-        this.statusEditer = false;
       }
-
-      
+            
       this.jobPostForm.controls['title'].setValue(this.currentPost?.title);
       this.jobPostForm.controls['startDate'].setValue(this.currentPost?.startDate);
       this.jobPostForm.controls['endDate'].setValue(this.currentPost?.endDate);

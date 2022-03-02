@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  serviceUrl: "https://nvc-jobmarket-api.herokuapp.com"
+  serviceUrl: "http://localhost:4000"
 };
 
 /*

@@ -2,7 +2,7 @@
     <div class="container content">
         <div class="container my-5">
             <div class="post-content p-4">
-    
+
                 <div class="post-box container mb-5 p-4">
                     <div class="row">
                         <h1>โพสต์รับสมัคร</h1>
@@ -14,7 +14,8 @@
                                 หัวข้อ :
                             </div>
                             <div class="col-md">
-                                <input placeholder="เปิดรับสมัครงาน" class="form-control" type="text" formControlName="title">
+                                <input placeholder="เปิดรับสมัครงาน" class="form-control" type="text"
+                                    formControlName="title">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -40,19 +41,31 @@
                                     <option value="{{d.name}}" *ngFor="let d of departments">{{d.name}}</option>
                                 </select>
                             </div>
+                            <div class="col-md-3 pt-2">
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#addDepartment">
+                                    เพิ่มสาขา/แผนก
+                                </button>
+                            </div>
                         </div>
-    
+
                         <div class="row mb-3">
                             <div class="col-md-2 col-form-label">
                                 ตำแหน่งที่รับ :
                             </div>
                             <div class="col-md pt-2">
-                               <select name="" id="" class="form-select w-50" formControlName="position" required>
+                                <select name="" id="" class="form-select w-50" formControlName="position" required>
                                     <option value="{{p.name}}" *ngFor="let p of positions">{{p.name}}</option>
-                               </select>
+                                </select>
+                            </div>
+                            <div class="col-md-3 pt-2">
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                    data-bs-target="#addPosition">
+                                    เพิ่มตำแหน่ง
+                                </button>
                             </div>
                         </div>
-    
+
                         <div class="row mb-3">
                             <div class="col-md-2 col-form-label">
                                 อายุ :
@@ -67,7 +80,7 @@
                                 <input placeholder="30" class="form-control" type="text" formControlName="ageMax">
                             </div>
                         </div>
-    
+
                         <div class="row mb-3">
                             <div class="col-md-2 col-form-label">
                                 เงินเดือน :
@@ -87,7 +100,8 @@
                                 รายละเอียดงาน :
                             </div>
                             <div class="col-md">
-                                <textarea placeholder="รายละเอียดของงานที่รับสมัคร" class="form-control" rows="3" formControlName="description"></textarea>
+                                <textarea placeholder="รายละเอียดของงานที่รับสมัคร" class="form-control" rows="3"
+                                    formControlName="description"></textarea>
                             </div>
                         </div>
                         <div class="row my-4">
@@ -100,6 +114,51 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="modal fade" id="addDepartment" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form class="modal-content" [formGroup]="departmentForm">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">เพิ่มสาขา/แผนก</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for=""><b>ชื่อสาขา/แผนก</b></label>
+                                    <input class="form-control" type="text" name="" id="" formControlName="departmentName">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal" (click)="cancel()">ยกเลิก</button>
+                                    <button type="button" class="btn btn-primary" (click)="onAddDepartment()">เพิ่ม</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="addPosition" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <form class="modal-content" [formGroup]="positionForm">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">เพิ่มตำแหน่ง</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <label for=""><b>ชื่อตำแหน่ง</b></label>
+                                    <input class="form-control" type="text" name="" id="" formControlName="positionName">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal" (click)="cancel()">ยกเลิก</button>
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="onAddPosition()">เพิ่ม</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

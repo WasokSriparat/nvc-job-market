@@ -1,0 +1,63 @@
+<div *ngIf="statusAdmin">
+    <div class="container pt-5">
+        <div class="p-3 mt-5">
+            <div class="row mb-3">
+                <h3><b>จัดการบริษัท</b></h3>
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                ลำดับ
+                            </th>
+                            <th>
+                                ชื่อบริษัท
+                            </th>
+                            <th>
+                                อีเมล
+                            </th>
+                            <th>
+                                เบอร์โทร
+                            </th>
+                            <th>
+                                ประเภท
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let c of companies,let i = index" >
+                            <th>
+                                {{i+1}}
+                            </th>
+                            <td>
+                                <a class="m-0 p-0 text-decoration-none text-info" routerLink="/profile/company/{{c._id}}">
+                                    <b class="m-0 p-0" >{{c.name}}</b>
+                                </a>
+                            </td>
+                            <td>
+                                {{c.email}}
+                            </td>
+                            <td>
+                                {{c.phoneNumber}}
+                            </td>
+                            <td>
+                                <b class="text-primary" *ngIf="c.category == 'company'">บริษัท</b>
+                                <b class="text-warning" *ngIf="c.category == 'admin'">แอดมิน</b>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-danger" (click)="deleteCompany(c._id)" *ngIf="c.category != 'admin'">
+                                    ลบ
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<app-main *ngIf="!statusAdmin"></app-main>

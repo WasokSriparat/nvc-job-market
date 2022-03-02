@@ -16,6 +16,8 @@ export class JobPostAddComponent implements OnInit {
 
   isLoggedIn = false;
   jobPostForm!: FormGroup;
+  departmentForm!: FormGroup;
+  positionForm!: FormGroup;
   currentUser: any;
   positions: any;
   departments: any;
@@ -39,6 +41,14 @@ export class JobPostAddComponent implements OnInit {
     this.positionService.getPositions().subscribe((res: any) => {
       this.positions = res.data;
     });
+
+    this.departmentForm = new FormGroup({
+      departmentName : new FormControl()
+    })
+
+    this.positionForm = new FormGroup({
+      positionName : new FormControl()
+    })
 
     this.isLoggedIn = !!this.tokenStorage.getToken();
     if (this.isLoggedIn) {
@@ -66,6 +76,59 @@ export class JobPostAddComponent implements OnInit {
     })
 
 
+  }
+
+  onAddDepartment(){
+    let deparment = {
+      name: this.departmentForm.value.departmentName
+    }
+    this.departmentService.addDepartment(deparment).subscribe((res)=>{
+      if(res.msg == "ok"){
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'เพิ่มสำเร็จ'
+        })
+        this.departmentService.getDepartments().subscribe((res:any)=>{
+          this.departments = res.data;
+        })
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'เพิ่มไม่สำเร็จ'
+        })
+      }
+    })
+  }
+
+  onAddPosition(){
+    let position = {
+      name: this.positionForm.value.positionName
+    }
+    this.positionService.addPosition(position).subscribe((res)=>{
+      if(res.msg == "ok"){
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'เพิ่มสำเร็จ'
+        })
+        this.positionService.getPositions().subscribe((res:any)=>{
+          this.positions = res.data;
+        })
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'เพิ่มไม่สำเร็จ'
+        })
+      }
+    })
+  }
+
+  cancel(){
+    this.departmentForm.reset();
+    this.positionForm.reset();
   }
 
   onSavePost() {

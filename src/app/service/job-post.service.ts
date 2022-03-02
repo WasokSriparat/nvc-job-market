@@ -30,6 +30,11 @@ export class JobPostService {
     return this.http.get<any>(getUrl);
   }
 
+  getJobPostByMemberId(id:any){
+    let getUrl = `${this.url}/member/${id}`;
+    return this.http.get<any>(getUrl);
+  }
+
   addJobPost(jobPost:any){
     return this.http.post<any>(this.url,jobPost)
     .pipe(map((res)=>{
@@ -47,6 +52,22 @@ export class JobPostService {
 
   addApplicant(id:any,applicant:any){
     let getUrl = `${this.url}/applicant/add/${id}`;
+    return this.http.patch<any>(getUrl,applicant)
+    .pipe(map((res)=>{
+      return res;
+    }))
+  }
+
+  updateApplicantStatus(id:any,applicant:any){
+    let getUrl = `${this.url}/applicant/update/status/${id}`;
+    return this.http.patch<any>(getUrl,applicant)
+    .pipe(map((res)=>{
+      return res;
+    }))
+  }
+
+  deleteApplicant(id:any , applicant:any){
+    let getUrl = `${this.url}/applicant/delete/${id}`;
     return this.http.patch<any>(getUrl,applicant)
     .pipe(map((res)=>{
       return res;

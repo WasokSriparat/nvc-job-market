@@ -16,10 +16,11 @@ export class JobPostAddComponent implements OnInit {
 
   isLoggedIn = false;
   jobPostForm!: FormGroup;
-  currentUser:any;
+  currentUser: any;
   positions: any;
   departments: any;
   statusMember = false;
+  companyData = false;
 
   constructor(
     private jobPostService: JobPostService,
@@ -31,19 +32,22 @@ export class JobPostAddComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.departmentService.getDepartments().subscribe((res:any)=>{
+    this.departmentService.getDepartments().subscribe((res: any) => {
       this.departments = res.data;
     });
 
-    this.positionService.getPositions().subscribe((res:any)=>{
-      this.positions =  res.data;
+    this.positionService.getPositions().subscribe((res: any) => {
+      this.positions = res.data;
     });
 
     this.isLoggedIn = !!this.tokenStorage.getToken();
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorage.getUser();
+      if (this.currentUser.phoneNumber == null || this.currentUser.address == null) {
+        this.companyData = true;
+      }
 
-      if (this.currentUser.category == "member"){
+      if (this.currentUser.category == "member") {
         this.statusMember = true;
       }
     }
@@ -60,59 +64,69 @@ export class JobPostAddComponent implements OnInit {
       department: new FormControl(),
       position: new FormControl()
     })
-    
+
 
   }
 
-  onSavePost(){
-    let jobpost = {
-      company_id: this.currentUser._id,
-      companyName: this.currentUser.name,
-      title: this.jobPostForm.value.title,
-      startDate: this.jobPostForm.value.startDate,
-      endDate: this.jobPostForm.value.endDate,
-      ageMin: this.jobPostForm.value.ageMin,
-      ageMax: this.jobPostForm.value.ageMax,
-      salaryMin: this.jobPostForm.value.salaryMin,
-      salaryMax: this.jobPostForm.value.salaryMax,
-      description: this.jobPostForm.value.description,
-      department: this.jobPostForm.value.department,
-      position: this.jobPostForm.value.position,
-    }
+  onSavePost() {
 
-    if(this.jobPostForm.value.title == null ||
-      this.jobPostForm.value.startDate == null ||
-      this.jobPostForm.value.description == null ||
-      this.jobPostForm.value.department == null ||
-      this.jobPostForm.value.position == null ){
+    if (this.companyData) {
       Swal.fire({
         icon: 'warning',
-        title: 'Warning',
-        text: 'กรุณากรอกข้อมูลครบ'
+        title: 'ไม่สามารถสมัครได้',
+        text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบ',
+        footer: '<a href="/profile/edit">แก้ไข ข้อมูลส่วนตัว</a>'
       })
-    }else{
-      console.log(jobpost);
-      this.jobPostService.addJobPost(jobpost).subscribe((res)=>{
-        
-        if(res.msg == "Post Complete"){
-          Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'เพิ่มสำเร็จ'
-          })
-          this.router.navigate([`/jobpost/company/${this.currentUser._id}`]);
-        }else{
-          Swal.fire({
-            icon: 'error',
-            title: 'error',
-            text: 'เพิ่มไม่สำเร็จ'
-          })
-          this.router.navigate(["/jobpost/add"]);
-        }
-      });
+    } else {
+      let jobpost = {
+        company_id: this.currentUser._id,
+        companyName: this.currentUser.name,
+        title: this.jobPostForm.value.title,
+        startDate: this.jobPostForm.value.startDate,
+        endDate: this.jobPostForm.value.endDate,
+        ageMin: this.jobPostForm.value.ageMin,
+        ageMax: this.jobPostForm.value.ageMax,
+        salaryMin: this.jobPostForm.value.salaryMin,
+        salaryMax: this.jobPostForm.value.salaryMax,
+        description: this.jobPostForm.value.description,
+        department: this.jobPostForm.value.department,
+        position: this.jobPostForm.value.position,
+      }
+
+      if (this.jobPostForm.value.title == null ||
+        this.jobPostForm.value.startDate == null ||
+        this.jobPostForm.value.description == null ||
+        this.jobPostForm.value.department == null ||
+        this.jobPostForm.value.position == null) {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Warning',
+          text: 'กรุณากรอกข้อมูลครบ'
+        })
+      } else {
+        this.jobPostService.addJobPost(jobpost).subscribe((res) => {
+
+          if (res.msg == "Post Complete") {
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'เพิ่มสำเร็จ'
+            })
+            this.router.navigate([`/jobpost/company`]);
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'error',
+              text: 'เพิ่มไม่สำเร็จ'
+            })
+            this.router.navigate(["/jobpost/add"]);
+          }
+        });
+      }
     }
 
-    
+
+
   }
 
 }

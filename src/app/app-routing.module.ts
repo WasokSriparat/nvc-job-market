@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: "jobpost/detail/:id", component: JobDetailComponent },
   { path: "jobpost/register", component: JobRegisterComponent, canActivate: [AuthGuard] },
   { path: "jobpost/applicant", component: JobApplicantComponent, canActivate: [AuthGuard] },
-  {path: "jobpost/company/:id",component: CompanyPostComponent},
+  {path: "jobpost/company",component: CompanyPostComponent, canActivate: [AuthGuard] },
   { path: "profile/member/:id", component: ViewMemberComponent },
   { path: "profile/company/:id", component: ViewCompanyComponent }
 ];

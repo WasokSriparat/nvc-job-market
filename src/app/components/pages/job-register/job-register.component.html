@@ -1,46 +1,48 @@
 <div class="container content">
-    <div class="container my-5">
-        <form action="" class="d-flex justify-content-center">
+    <!-- <div class="container my-5">
+        <form action="" class="d-flex justify-content-center" [formGroup]="searchForm">
             <div class="row search-box">
                 <div class="col-10">
-                    <input type="text" class="form-control w-100" placeholder="ค้าหางาน">
+                    <input type="text" class="form-control w-100" placeholder="ค้าหางาน" formControlName="title">
                 </div>
                 <div class="col-2">
-                    <button class="btn btn-primary w-100">ค้นหา</button>
+                    <button class="btn btn-primary w-100" (click)="onSearch()">ค้นหา</button>
                 </div>
             </div>
         </form>
-    </div>
+    </div> -->
     <div class="container my-5">
         <div class="post-content p-4">
-
-            <div class="post-box container mb-5 p-4">
+            <div class="post-box container mb-5 p-4" *ngFor="let p of jobPosts">
                 <div class="row">
-                    <div class="col-2 px-auto">
+                    <div class="col-2 px-auto d-flex justify-content-center">
                         <div class="img-box border rounded-circle">
                             <img src="../../../../assets/images/NullProfile.png" alt="">
                         </div>
                     </div>
                     <div class="col py-2">
                         <div class="row">
-                            <a class="m-0 p-0" href="">Username</a>
+                            <a class="m-0 p-0 text-decoration-none" routerLink="/profile/company/{{p.company_id}}"><b
+                                    class="m-0 p-0">{{p.companyName}}</b></a>
                         </div>
                         <div class="row">
-                            01/01/2022 : 09.00
+                            {{p.createdAt | date:"dd / MM / yyyy : HH.mm" }}
                         </div>
                     </div>
-                    <div class="col-2 py-2">
-                        <div routerLink="/jobpost/detail" class="btn btn-warning">ดูเพิ่มเติม</div>
+                    <div class="col-2">
+                        <h5 class="text-success text-center" *ngIf="p.postStatus"><b>เปิดรับสมัคร</b></h5>
+                        <h5 class="text-danger text-center" *ngIf="!p.postStatus"><b>ปิดรับสมัคร</b></h5>
                     </div>
                 </div>
                 <hr>
                 <div class="row mb-4">
                     <div class="col-12">
                         <div class="row">
-                            <h3>หัวข้อ</h3>
+                            <h3>{{p.title}}</h3>
                         </div>
                         <div class="row">
-                            <p class="m-0">ตั้งแต่วันที่ 01/01/2022 ถึง 02/01/2022</p>
+                            <p class="m-0">ตั้งแต่วันที่ {{p.startDate | date:"dd / MM / yyyy " }} ถึง {{p.endDate |
+                                date:"dd / MM / yyyy " }}</p>
                         </div>
                     </div>
                 </div>
@@ -48,38 +50,34 @@
                     <div class="col-6">
                         <h5>สาขา/แผนก</h5>
                         <div class="row">
-                            <div class="col-1">
-                                Tag1
-                            </div>
-                            <div class="col-1">
-                                Tag2
-                            </div>
-                            <div class="col-1">
-                                Tag3
+                            <div class="col">
+                                {{p.department}}
                             </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <h5>ตำแหน่ง</h5>
                         <div class="row">
-                            <div class="col-1">
-                                Tag1
-                            </div>
-                            <div class="col-1">
-                                Tag2
-                            </div>
-                            <div class="col-1">
-                                Tag3
+                            <div class="col">
+                                {{p.position}}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <p class="col-6">อายุ : 18 - 20 </p>
-                    <p class="col-6">เงินเดือน : 100 - 1000 </p>
+                    <p class="col-6">อายุ : {{p.ageMin}} - {{p.ageMax}} </p>
+                    <p class="col-6">เงินเดือน : {{p.salaryMin}} - {{p.salaryMax}} </p>
+                </div>
+                <div class="row">
+                    <div class="col-12 py-2">
+                        <div routerLink="/jobpost/detail/{{p._id}}" class="btn btn-outline-primary w-100">ดูเพิ่มเติม
+                        </div>
+                    </div>
                 </div>
             </div>
-            
+
+
+
         </div>
     </div>
 </div>

@@ -39,7 +39,6 @@ export class ProfileEditComponent implements OnInit {
   
           firstName: new FormControl(),
           lastName: new FormControl(),
-          email: new FormControl(),
           phoneNumber: new FormControl(),
           birthDay: new FormControl(),
           description: new FormControl(),
@@ -78,7 +77,6 @@ export class ProfileEditComponent implements OnInit {
   
       }
   
-      this.infoForm.controls['email'].setValue(this.currentUser.email);
       this.infoForm.controls['phoneNumber'].setValue(this.currentUser.phoneNumber);
       this.infoForm.controls['description'].setValue(this.currentUser.description);
   
@@ -113,7 +111,7 @@ export class ProfileEditComponent implements OnInit {
       let member = {
         firstName: this.infoForm.value.firstName,
         lastName: this.infoForm.value.lastName,
-        email: this.infoForm.value.email,
+        email: this.currentUser.email,
         phoneNumber: this.infoForm.value.phoneNumber,
         birthDay: this.infoForm.value.birthDay,
         description: this.infoForm.value.description,

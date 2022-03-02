@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatSliderModule } from '@angular/material/slider';
 
@@ -27,6 +27,7 @@ import { ViewCompanyComponent } from './components/pages/view-company/view-compa
 import { ViewMemberComponent } from './components/pages/view-member/view-member.component';
 import { BrowserAnimationsModule,NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CompanyPostComponent } from './components/pages/company-post/company-post.component';
+import { AuthInterceptor } from './helper/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -62,7 +63,13 @@ import { CompanyPostComponent } from './components/pages/company-post/company-po
     MatTabsModule,
     MatSliderModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

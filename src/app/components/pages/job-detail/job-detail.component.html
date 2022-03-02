@@ -74,13 +74,14 @@
                 <div class="row">
                     <div class="col py-2">
                         <div class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#apply"
-                            *ngIf="statusMember && postActive">สมัคร</div>
+                            *ngIf="statusMember && postActive && !statusApply">สมัคร</div>
                         <div class="w-100 row" *ngIf="statusEditer">
                             <div class="col"></div>
                             <div class="col d-flex justify-content-center">
-                                <div class=" btn mx-auto btn-warning" style="width: 40%;"  routerLink="/jobpost/edit/{{currentPost?._id}}">
+                                <div class=" btn mx-auto btn-warning" style="width: 40%;"
+                                    routerLink="/jobpost/edit/{{currentPost?._id}}">
                                     แก้ไขโพสต์</div>
-                                <div class=" btn mx-auto btn-danger"  style="width: 40%;" (click)="onDelete()">
+                                <div class=" btn mx-auto btn-danger" style="width: 40%;" (click)="onDelete()">
                                     ลบโพสต์</div>
                             </div>
                         </div>
@@ -94,25 +95,70 @@
                     <mat-tab-group>
                         <mat-tab label="รอยืนยัน">
                             <div class="col-12" id="list">
-                                <div class="row m-0 border-bottom py-2">
-                                    <div class="col-1 text-center"><b>ลำดับ</b></div>
-                                    <div class="col-3 text-center"><b>ชื่อ - นามสกุล</b></div>
-                                    <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
-                                    <div class="col-3 text-center"><b>รายละเอียด</b></div>
-                                    <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
-                                </div>
                                 <div style="height: 300px;" class="overflow-scroll">
-                                    <div class="row m-0 border-bottom py-2 align-items-center"
-                                        *ngFor="let a of currentPost?.applicants , let i = index">
-                                        <div class="col-1 text-center"><b>{{i+1}}</b></div>
-                                        <div class="col-3 text-start">ก้องภพ</div>
-                                        <div class="col-2 text-center">26/02/2565</div>
-                                        <div class="col-3 d-flex justify-content-center">
-                                            <button class="btn btn-outline-primary" type="button">ดูรายละเอียด</button>
-                                        </div>
-                                        <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
-                                            <button class="btn btn-success mx-auto " style="width: 40%;">ผ่าน</button>
-                                            <button class="btn btn-danger mx-auto " style="width: 40%;">ไม่ผ่าน</button>
+                                    <div class="row m-0 border-bottom py-2">
+                                        <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
+                                        <div class="col-3 text-start"><b>ชื่อ - นามสกุล</b></div>
+                                        <div class="col-3 text-center"><b>รายละเอียด</b></div>
+                                        <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
+                                        <div class="col-1 text-center"><b>ยกเลิก</b></div>
+                                    </div>
+                                    <div *ngFor="let a of currentPost?.applicants">
+                                        <div class="row m-0 border-bottom py-2 align-items-center"
+                                            *ngIf="a.regisStatus == 'NotView'">
+                                            <div class="col-2 text-center">
+                                                <b>{{a.regisDate | date:"dd / MM / yyyy"}}</b>
+                                            </div>
+                                            <div class="col-3 text-start"><a class="text-decoration-none"
+                                                    routerLink="/profile/member/{{a?.member_id}}">{{a?.memberName}}</a>
+                                            </div>
+                                            <div class="col-3 text-center">
+                                                <button class="btn btn-outline-primary" type="button"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                                                    aria-controls="offcanvasScrolling">รายละเอียด</button>
+                                                <div class="offcanvas offcanvas-end mt-5" tabindex="-1" id="offcanvasScrolling"
+                                                    aria-labelledby="offcanvasRightLabel">
+                                                    <div class="offcanvas-header mt-2">
+                                                        <h4 id="offcanvasRightLabel"><b>รายละเอียด</b></h4>
+                                                        <button type="button" class="btn-close text-reset"
+                                                            data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="offcanvas-body text-start">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <h5><b>สาเหตุที่อยากทำงานนี้</b></h5>
+                                                                <div class="col py-3">
+                                                                    <p>{{a?.description}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <h5><b>เอกสาร</b></h5>
+                                                                <div class="col py-3">
+                                                                    <p>Lorem, ipsum dolor sit amet consectetur
+                                                                        adipisicing elit.
+                                                                        Necessitatibus repellendus corporis, laudantium
+                                                                        blanditiis
+                                                                        cumque culpa, autem earum illo cupiditate eum
+                                                                        porro ducimus fuga
+                                                                        minima molestias iusto enim sequi maiores eos!
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
+                                                <button class="btn btn-success mx-auto" style="width: 40%;"
+                                                    (click)="updateApplicant(a._id,'Pass')">ผ่าน</button>
+                                                <button class="btn btn-danger mx-auto" style="width: 40%;"
+                                                    (click)="updateApplicant(a._id,'NotPass')">ไม่ผ่าน</button>
+                                            </div>
+                                            <div class="col-1 d-flex justify-content-center">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                    (click)="deleteApplicant(a._id)">ยกเลิก</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -120,49 +166,142 @@
                         </mat-tab>
                         <mat-tab label="ผ่าน">
                             <div class="col-12" id="pass">
-                                <div class="row m-0 border-bottom py-2">
-                                    <div class="col-1 text-center"><b>ลำดับ</b></div>
-                                    <div class="col text-center"><b>ชื่อ - นามสกุล</b></div>
-                                    <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
-                                    <div class="col text-center"><b>รายละเอียด</b></div>
-                                    <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
-                                </div>
                                 <div style="height: 300px;" class="overflow-scroll">
-                                    <div class="row m-0 border-bottom py-2 align-items-center"
-                                        *ngFor="let item of positions , let i = index">
-                                        <div class="col-1 text-center"><b>{{i+1}}</b></div>
-                                        <div class="col text-start">ก้องภพ</div>
-                                        <div class="col-2 text-center">26/02/2565</div>
-                                        <div class="col d-flex justify-content-center">
-                                            <button class="btn btn-outline-primary" type="button">ดูรายละเอียด</button>
-                                        </div>
-                                        <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
-                                            <b class="text-success">ผ่าน</b>
+                                    <div class="row m-0 border-bottom py-2">
+                                        <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
+                                        <div class="col-3 text-start"><b>ชื่อ - นามสกุล</b></div>
+                                        <div class="col-3 text-center"><b>รายละเอียด</b></div>
+                                        <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
+                                        <div class="col-1 text-center"><b>ยกเลิก</b></div>
+                                    </div>
+                                    <div *ngFor="let a of currentPost?.applicants">
+                                        <div class="row m-0 border-bottom py-2 align-items-center"
+                                            *ngIf="a.regisStatus == 'Pass'">
+                                            <div class="col-2 text-center">
+                                                <b>{{a.regisDate | date:"dd / MM / yyyy"}}</b>
+                                            </div>
+                                            <div class="col-3 text-start"><a class="text-decoration-none"
+                                                    routerLink="/profile/member/{{a?.member_id}}">{{a?.memberName}}</a>
+                                            </div>
+                                            <div class="col-3 text-center">
+                                                <button class="btn btn-outline-primary" type="button"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                                                    aria-controls="offcanvasScrolling">รายละเอียด</button>
+                                                <div class="offcanvas offcanvas-end mt-5" tabindex="-1" id="offcanvasScrolling"
+                                                    aria-labelledby="offcanvasRightLabel">
+                                                    <div class="offcanvas-header mt-2">
+                                                        <h4 id="offcanvasRightLabel"><b>รายละเอียด</b></h4>
+                                                        <button type="button" class="btn-close text-reset"
+                                                            data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="offcanvas-body text-start">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <h5><b>สาเหตุที่อยากทำงานนี้</b></h5>
+                                                                <div class="col py-3">
+                                                                    <p>{{a?.description}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <h5><b>เอกสาร</b></h5>
+                                                                <div class="col py-3">
+                                                                    <p>Lorem, ipsum dolor sit amet consectetur
+                                                                        adipisicing elit.
+                                                                        Necessitatibus repellendus corporis, laudantium
+                                                                        blanditiis
+                                                                        cumque culpa, autem earum illo cupiditate eum
+                                                                        porro ducimus fuga
+                                                                        minima molestias iusto enim sequi maiores eos!
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
+                                                <button class="btn btn-success mx-auto" style="width: 40%;"
+                                                    (click)="updateApplicant(a._id,'Pass')">ผ่าน</button>
+                                                <button class="btn btn-outline-danger mx-auto" style="width: 40%;"
+                                                    (click)="updateApplicant(a._id,'NotPass')">ไม่ผ่าน</button>
+                                            </div>
+                                            <div class="col-1 d-flex justify-content-center">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                    (click)="deleteApplicant(a._id)">ยกเลิก</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </mat-tab>
                         <mat-tab label="ไม่ผ่าน">
-                            <div class="col-12" id="pass">
-                                <div class="row m-0 border-bottom py-2">
-                                    <div class="col-1 text-center"><b>ลำดับ</b></div>
-                                    <div class="col text-center"><b>ชื่อ - นามสกุล</b></div>
-                                    <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
-                                    <div class="col text-center"><b>รายละเอียด</b></div>
-                                    <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
-                                </div>
+                            <div class="col-12" id="notPass">
                                 <div style="height: 300px;" class="overflow-scroll">
-                                    <div class="row m-0 border-bottom py-2 align-items-center"
-                                        *ngFor="let item of positions , let i = index">
-                                        <div class="col-1 text-center"><b>{{i+1}}</b></div>
-                                        <div class="col text-start">ก้องภพ</div>
-                                        <div class="col-2 text-center">26/02/2565</div>
-                                        <div class="col d-flex justify-content-center">
-                                            <button class="btn btn-outline-primary" type="button">ดูรายละเอียด</button>
-                                        </div>
-                                        <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
-                                            <b class="text-danger">ไม่ผ่าน</b>
+                                    <div class="row m-0 border-bottom py-2">
+                                        <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
+                                        <div class="col-3 text-start"><b>ชื่อ - นามสกุล</b></div>
+                                        <div class="col-3 text-center"><b>รายละเอียด</b></div>
+                                        <div class="col-3 text-center" *ngIf="statusPoster"><b>ยืนยัน</b></div>
+                                        <div class="col-1 text-center"><b>ยกเลิก</b></div>
+                                    </div>
+                                    <div *ngFor="let a of currentPost?.applicants">
+                                        <div class="row m-0 border-bottom py-2 align-items-center"
+                                            *ngIf="a.regisStatus == 'NotPass'">
+                                            <div class="col-2 text-center">
+                                                <b>{{a.regisDate | date:"dd / MM / yyyy"}}</b>
+                                            </div>
+                                            <div class="col-3 text-start"><a class="text-decoration-none"
+                                                    routerLink="/profile/member/{{a?.member_id}}">{{a?.memberName}}</a>
+                                            </div>
+                                            <div class="col-3 text-center ">
+                                                <button class="btn btn-outline-primary" type="button"
+                                                    data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling"
+                                                    aria-controls="offcanvasScrolling">รายละเอียด</button>
+                                                <div class="offcanvas offcanvas-end mt-5" tabindex="-1" id="offcanvasScrolling"
+                                                    aria-labelledby="offcanvasRightLabel">
+                                                    <div class="offcanvas-header mt-2">
+                                                        <h4 id="offcanvasRightLabel"><b>รายละเอียด</b></h4>
+                                                        <button type="button" class="btn-close text-reset"
+                                                            data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="offcanvas-body text-start">
+                                                        <div class="container">
+                                                            <div class="row">
+                                                                <h5><b>สาเหตุที่อยากทำงานนี้</b></h5>
+                                                                <div class="col py-3">
+                                                                    <p>{{a?.description}}
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <h5><b>เอกสาร</b></h5>
+                                                                <div class="col py-3">
+                                                                    <p>Lorem, ipsum dolor sit amet consectetur
+                                                                        adipisicing elit.
+                                                                        Necessitatibus repellendus corporis, laudantium
+                                                                        blanditiis
+                                                                        cumque culpa, autem earum illo cupiditate eum
+                                                                        porro ducimus fuga
+                                                                        minima molestias iusto enim sequi maiores eos!
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-3 d-flex justify-content-center" *ngIf="statusPoster">
+                                                <button class="btn btn-outline-success mx-auto" style="width: 40%;"
+                                                    (click)="updateApplicant(a._id,'Pass')">ผ่าน</button>
+                                                <button class="btn btn-danger mx-auto" style="width: 40%;"
+                                                    (click)="updateApplicant(a._id,'NotPass')">ไม่ผ่าน</button>
+                                            </div>
+                                            <div class="col-1 d-flex justify-content-center">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                    (click)="deleteApplicant(a._id)">ยกเลิก</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -170,9 +309,79 @@
                         </mat-tab>
                     </mat-tab-group>
 
+                </div>
 
+                <div class="row" *ngIf="statusMember && myApply != null">
+                    <h3>รายละเอียดการสมัคร</h3>
+                    <div class="col-12" id="list">
+                        <div class="row m-0 border-bottom py-2">
+                            <div class="col-2 text-center"><b>วันที่สมัคร</b></div>
+                            <div class="col-3 text-start"><b>ชื่อ - นามสกุล</b></div>
+                            <div class="col-3 text-center"><b>รายละเอียด</b></div>
+                            <div class="col-3 text-center"><b>สถานะการสมัคร</b></div>
+                            <div class="col-1 text-center"><b>ยกเลิก</b></div>
+                        </div>
+                        <div class="row m-0 border-bottom py-2 align-items-center">
+                            <div class="col-2 text-center">
+                                <b>{{myApply?.regisDate | date:"dd / MM / yyyy "}}</b>
+                            </div>
+                            <div class="col-3 text-start"><a class="text-decoration-none"
+                                    routerLink="/profile/member/{{myApply?.member_id}}">{{myApply?.memberName}}</a>
+                            </div>
+                            <div class="col-3 text-center">
+                                <button class="btn btn-outline-primary" type="button" data-bs-toggle="offcanvas"
+                                    data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                    รายละเอียด
+                                </button>
 
-
+                                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
+                                    aria-labelledby="offcanvasRightLabel">
+                                    <div class="offcanvas-header">
+                                        <h4 id="offcanvasRightLabel"><b>รายละเอียด</b></h4>
+                                        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body text-start">
+                                        <div class="container">
+                                            <div class="row">
+                                                <h5><b>สาเหตุที่อยากทำงานนี้</b></h5>
+                                                <div class="col py-3">
+                                                    <p>{{myApply?.description}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <h5><b>เอกสาร</b></h5>
+                                                <div class="col py-3">
+                                                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                                                        Necessitatibus repellendus corporis, laudantium blanditiis
+                                                        cumque culpa, autem earum illo cupiditate eum porro ducimus fuga
+                                                        minima molestias iusto enim sequi maiores eos!</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3 d-flex justify-content-center">
+                                <div class="text-primary" *ngIf="myApply?.regisStatus == 'NotView'"><b>รอยืนยัน</b>
+                                </div>
+                                <div class="text-success" *ngIf="myApply?.regisStatus == 'Pass'"><b>ผ่าน</b></div>
+                                <div class="text-danger" *ngIf="myApply?.regisStatus == 'NotPass'"><b>ไม่ผ่าน</b></div>
+                            </div>
+                            <div class="col-1 d-flex justify-content-center">
+                                <button class="btn btn-outline-secondary" type="button"
+                                    (click)="deleteApplicant(myApply?._id)">ยกเลิก</button>
+                            </div>
+                        </div>
+                        <div class="row m-0 text-center border-bottom py-2 align-items-center" *ngIf="myApply.regisStatus != 'NotView'">
+                            <div class="text-success" *ngIf="myApply.regisStatus == 'Pass'">
+                               <b> *** คุณผ่านการประเมิน รอการติดต่อจากบริษัท ***</b>
+                            </div>
+                            <div class="text-danger" *ngIf="myApply.regisStatus == 'NotPass'">
+                                <b> *** คุณไม่ผ่านการประเมิน ***</b>
+                             </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -203,7 +412,7 @@
 
                             <div class="row mb-3">
                                 แนบเอกสาร ( resume , portfolio ) :
-                                <input type="file" name="" class="form-control" id="" >
+                                <input type="file" name="" class="form-control" id="">
                             </div>
                         </form>
                     </div>

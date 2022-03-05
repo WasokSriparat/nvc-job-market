@@ -136,7 +136,7 @@ export class JobPostAddComponent implements OnInit {
     if (this.companyData) {
       Swal.fire({
         icon: 'warning',
-        title: 'ไม่สามารถสมัครได้',
+        title: 'ไม่สามารถโพสต์ได้',
         text: 'กรุณากรอกข้อมูลส่วนตัวให้ครบ',
         footer: '<a href="/profile/edit">แก้ไข ข้อมูลส่วนตัว</a>'
       })

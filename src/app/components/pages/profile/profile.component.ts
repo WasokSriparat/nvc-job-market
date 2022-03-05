@@ -11,6 +11,7 @@ export class ProfileComponent implements OnInit {
   currentUser: any;
   isLoggedIn = false;
   statusMember = false;
+  profilePic = "../../../../assets/images/NullProfile.png";
 
   constructor(private tokenStorage: TokenStorageService,) { }
 
@@ -19,12 +20,14 @@ export class ProfileComponent implements OnInit {
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorage.getUser();
     }
-    console.log(this.currentUser.email)
     if (this.currentUser.category == "member") {
       this.statusMember = true;
       this.userName = `${this.currentUser.firstName}  ${this.currentUser.lastName}`;
     }else {
       this.userName = this.currentUser.name;
+    }
+    if(this.currentUser.profilePic){
+      this.profilePic = this.currentUser.profilePic;
     }
 
   }

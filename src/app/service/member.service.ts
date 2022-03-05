@@ -44,6 +44,14 @@ export class MemberService {
     }));
   }
 
+  updatePic(id:any,pic:any){
+    let getUrl = `${this.url}/profile/update/${id}`;
+    return this.http.patch<any>(getUrl,pic)
+    .pipe(map((res)=>{
+      return res;
+    }));
+  }
+
   updateAddress(id:any,address:any){
     let getUrl = `${this.url}/address/update/${id}`;
     return this.http.patch<any>(getUrl,address)

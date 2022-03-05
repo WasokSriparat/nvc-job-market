@@ -4,16 +4,12 @@
 
             <div class="post-box container mb-5 p-4">
                 <div class="row">
-                    <div class="col-2 px-auto d-flex justify-content-center">
-                        <div class="img-box border rounded-circle">
-                            <img src="../../../../assets/images/NullProfile.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col py-2">
+                    <div class="col py-2 ps-5">
                         <div class="row">
                             <a class="m-0 p-0 text-decoration-none"
-                                routerLink="/profile/company/{{currentPost?.company_id}}"><b
-                                    class="m-0 p-0">{{currentPost?.companyName}}</b></a>
+                                routerLink="/profile/company/{{currentPost?.company_id}}">
+                                <h4><b class="m-0 p-0">{{currentPost?.companyName}}</b></h4>
+                            </a>
                         </div>
                         <div class="row">
                             {{currentPost?.createdAt | date:"dd / MM / yyyy : HH.mm" }}
@@ -134,15 +130,8 @@
                                                             </div>
                                                             <div class="row">
                                                                 <h5><b>เอกสาร</b></h5>
-                                                                <div class="col py-3">
-                                                                    <p>Lorem, ipsum dolor sit amet consectetur
-                                                                        adipisicing elit.
-                                                                        Necessitatibus repellendus corporis, laudantium
-                                                                        blanditiis
-                                                                        cumque culpa, autem earum illo cupiditate eum
-                                                                        porro ducimus fuga
-                                                                        minima molestias iusto enim sequi maiores eos!
-                                                                    </p>
+                                                                <div class="col py-3">                                                                    
+                                                                    <a target="_blank" href="../../../../assets/files/Portfolio.pdf" class="btn btn-outline-secondary">ดูเอกสาร</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -205,15 +194,8 @@
                                                             </div>
                                                             <div class="row">
                                                                 <h5><b>เอกสาร</b></h5>
-                                                                <div class="col py-3">
-                                                                    <p>Lorem, ipsum dolor sit amet consectetur
-                                                                        adipisicing elit.
-                                                                        Necessitatibus repellendus corporis, laudantium
-                                                                        blanditiis
-                                                                        cumque culpa, autem earum illo cupiditate eum
-                                                                        porro ducimus fuga
-                                                                        minima molestias iusto enim sequi maiores eos!
-                                                                    </p>
+                                                                <div class="col py-3">                                                                    
+                                                                    <a target="_blank" href="../../../../assets/files/Portfolio.pdf" class="btn btn-outline-secondary">ดูเอกสาร</a>
                                                                 </div>
                                                             </div>
                                                         </div>

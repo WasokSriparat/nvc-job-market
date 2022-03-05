@@ -14,6 +14,7 @@ export class NavigationComponent implements OnInit {
   statusCompany = false;
   statusAdmin = false;
   userName: any;
+  profilePic = "../../../../assets/images/NullProfile.png";
 
   constructor(private tokenStorage: TokenStorageService) { }
 
@@ -21,6 +22,10 @@ export class NavigationComponent implements OnInit {
     this.isLoggedIn = !!this.tokenStorage.getToken();
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorage.getUser();
+
+      if(this.currentUser.profilePic){
+        this.profilePic = this.currentUser.profilePic;
+      }
 
       if (this.currentUser.category == "admin") {
         this.statusCompany = true;

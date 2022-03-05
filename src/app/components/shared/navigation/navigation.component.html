@@ -47,8 +47,8 @@
             <div class="nav-item dropdown" *ngIf="isLoggedIn">
                 <div class="profile-menu d-flex" href="#" id="dropdown04" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    <img class="border rounded-circle" style="width: 40px; height: 40px;"
-                        src="../../../../assets/images/NullProfile.png" alt="">
+                    <img class="border rounded-circle" style="width: 40px; height: 40px; object-fit: cover;"
+                        [src]="profilePic" alt="">
                     <h5 class="mx-3 mt-2">{{userName}}</h5>
                 </div>
                 <ul class="dropdown-menu dropdown-menu-lg-end" aria-labelledby="dropdown04">

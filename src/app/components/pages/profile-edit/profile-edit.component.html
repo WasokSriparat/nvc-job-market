@@ -10,9 +10,14 @@
                 <div class="col p-4 mx-auto">
                     <div class="row">
                         <div class="col-12 mb-5 d-flex justify-content-center">
-                            <div class="img-box border">
-                                <img src="../../../../assets/images/NullProfile.png" alt="">
+                            <div class="img-box row justify-content-center">
+                                <img [src]="profilePic" alt="">
                             </div>
+                            <form [formGroup]="picForm" class="mx-5 w-25">
+                                <label for="">Picture Link</label>
+                                <input type="text" class="form-control mb-2" formControlName="pic">
+                                <button class="btn btn-success" (click)="onSavePic()">บันทึก</button>
+                            </form>
                         </div>
                         <form class="col-12" [formGroup]="infoForm">
                             <div class="row" *ngIf="statusMember">

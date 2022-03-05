@@ -22,6 +22,9 @@ export class ProfileEditComponent implements OnInit {
   infoForm!: FormGroup;
   addressForm!: FormGroup;
   educationForm!: FormGroup;
+  picForm!: FormGroup;
+
+  profilePic = "../../../../assets/images/NullProfile.png";
 
   constructor(private tokenStorage: TokenStorageService, private memberService: MemberService, private companyService: CompanyService, private router: Router) { }
 
@@ -35,6 +38,14 @@ export class ProfileEditComponent implements OnInit {
         this.statusMember = true;
         this.userName = `${this.currentUser.firstName}  ${this.currentUser.lastName}`;
   
+        if(this.currentUser.profilePic){
+          this.profilePic = this.currentUser.profilePic;
+        }
+
+        this.picForm = new FormGroup({
+          pic: new FormControl()
+        })
+
         this.infoForm = new FormGroup({
   
           firstName: new FormControl(),
@@ -63,6 +74,13 @@ export class ProfileEditComponent implements OnInit {
   
       } else {
         this.userName = this.currentUser.name;
+        if(this.currentUser.profilePic){
+          this.profilePic = this.currentUser.profilePic;
+        }
+
+        this.picForm = new FormGroup({
+          pic: new FormControl()
+        })
   
         this.infoForm = new FormGroup({
   
@@ -98,10 +116,33 @@ export class ProfileEditComponent implements OnInit {
 
     }
 
-    
+  }
 
-
-
+  onSavePic(){
+    let pic = {
+      pic: this.picForm.value.pic
+    }
+    if(this.statusMember){
+      this.memberService.updatePic(this.currentUser._id,pic).subscribe((res)=>{
+        this.tokenStorage.saveUser(res.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'แก้ไข้สำเร็จ'
+        })
+        window.location.reload();
+      })
+    }else{
+      this.companyService.updatePic(this.currentUser._id,pic).subscribe((res)=>{
+        this.tokenStorage.saveUser(res.data);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: 'แก้ไข้สำเร็จ'
+        })
+        window.location.reload();
+      })
+    }
   }
 
   onSaveInfo() {

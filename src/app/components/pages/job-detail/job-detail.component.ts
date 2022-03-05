@@ -127,7 +127,7 @@ export class JobDetailComponent implements OnInit {
             'ลบโพสต์เสร็จสิ้น',
             'success'
           )
-          this.router.navigate([`/jobpost/company/${this.currentPost.company_id}`]);
+          this.router.navigate([`/jobpost/search`]);
         })
       }
     })
@@ -228,7 +228,6 @@ export class JobDetailComponent implements OnInit {
     let applicant = {
       applicant_id : applicantId
     }
-    console.log(this.id,applicant)
     Swal.fire({
       title: "คุณต้องการยกเลิกการสมัครงานนี้หรือไม่ ?",
       text: "",

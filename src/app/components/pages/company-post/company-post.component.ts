@@ -28,7 +28,7 @@ export class CompanyPostComponent implements OnInit {
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorage.getUser();
       this.id = this.currentUser._id;
-      if(this.currentUser == 'admin'){
+      if(this.currentUser.category == 'admin'){
         this.statusAdmin = true;
       }
     }

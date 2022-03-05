@@ -15,6 +15,7 @@ export class CompanyPostComponent implements OnInit {
   id:any;
   isLoggedIn = false;
   currentUser:any;
+  statusAdmin = false;
 
   constructor(private jobpostService: JobPostService, 
     private router : Router,
@@ -27,11 +28,21 @@ export class CompanyPostComponent implements OnInit {
     if (this.isLoggedIn) {
       this.currentUser = this.tokenStorage.getUser();
       this.id = this.currentUser._id;
+      if(this.currentUser == 'admin'){
+        this.statusAdmin = true;
+      }
     }
 
-    this.jobpostService.getJobPostByCompanyId(this.id).subscribe((res:any)=>{
-      this.jobPosts = res.data;
-    })
+    if(this.statusAdmin){
+      this.jobpostService.getJobPosts().subscribe((res:any)=>{
+        this.jobPosts = res.data;
+      })
+    }else{
+      this.jobpostService.getJobPostByCompanyId(this.id).subscribe((res:any)=>{
+        this.jobPosts = res.data;
+      })
+    }
+    
 
   }
 
